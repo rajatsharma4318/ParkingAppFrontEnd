@@ -1,0 +1,67 @@
+<div class="login">
+    <div class="container">
+     <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+    <h1 class="text-center">Registartion  Page</h1>
+    <br>
+    <br>
+    <p class="text-danger" *ngIf="errormsg">{{errormsg}}</p>
+    <form #ragistration="ngForm" (ngSubmit)="registerUser()">
+     
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email Address</label>
+            <input type="email" name="email" [(ngModel)]="newuser.email" class="form-control"  
+            aria-describedby="emailHelp"  placeholder="Enter email" email required="required" maxlength="30" minlength="8" #email="ngModel">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class='alert alert-danger' *ngIf="!email.valid && (email.touched || email.dirty)">
+            <div *ngIf='email.errors["required"]'>
+                please fill the filed
+            </div>
+            <div *ngIf='email.errors["minlength"]'>
+                min length 8
+            </div>
+            <div *ngIf='email.errors["maxlength"]'>
+                mamx length 30
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" [(ngModel)]="newuser.username" class="form-control"  
+            aria-describedby="usernameHelp"  placeholder="Enter username"  required="required" minlength="2" #username="ngModel">
+            <small id="usernameHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+          </div>
+          <div class='alert alert-danger' *ngIf="!username.valid && (username.touched || username.dirty)">
+            <div *ngIf='username.errors["required"]'>
+                please fill the filed
+            </div>
+            <div *ngIf='username.errors["minlength"]'>
+                min length 2
+            </div>
+            <div *ngIf='username.errors["maxlength"]'>
+                mamx length 30
+            </div>
+        </div>
+    
+    
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" required="required" minlength="2"
+             [(ngModel)]="newuser.password" class="form-control"  placeholder="Password">
+          </div>
+      
+      
+
+       
+   
+    <button class="btn btn-success" [disabled]="!ragistration.valid" style="margin-right:10px;">save User</button> 
+    <button class="btn btn-danger">Login</button>
+    </form>
+    </div>  
+    </div>
+    </div>
+    </div>

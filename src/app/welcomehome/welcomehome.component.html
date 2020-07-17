@@ -1,0 +1,74 @@
+
+
+<div class="container" >
+<div class="row">
+
+<div class="col-md-6">
+<div class="subbox">
+<h2>Set The Car Slot Size </h2>
+
+<div class="form-row ">
+  
+    
+    <h5>Enter Slot</h5> <div class="text-danger" *ngIf="slotbooked">{{slotbooked}}</div>
+    <input type="text" class="form-control" name="slotsize" [(ngModel)]="slotsize" placeholder="Enter Slot Size number" required>
+    <br>
+    <button class="btn btn-success" (click)="setParkingSlotSize()" [disabled]="!slotsize" style="margin-right:10px;">Save</button>
+</div>
+
+<h2 style="margin-left:12px">Add Car Details</h2>
+<div class="text-danger" *ngIf="addedSuccess">{{addedSuccess}}</div>
+<button class="btn btn-danger" *ngIf="errorMessage">{{errorMessage}}</button>
+<div class="formbox">
+ <form  #cardata="ngForm" (ngSubmit)="bookcarSlot()">
+<div class="form-row ">
+     
+      <label for="validationTooltip01">Car Number</label>
+      <input type="text" class="form-control" name="registernumber" [(ngModel)]="newcar.registernumber" placeholder="KA-01-HH-00000" required>
+     
+</div>  
+<div class="form-row ">
+     
+    <label for="validationTooltip01">Car Color</label>
+    <input type="text" class="form-control" name="color" [(ngModel)]="newcar.color" placeholder="color" required>
+   
+</div>  
+<br>
+<br>   
+<button class="btn btn-success" [disabled]="!cardata.valid" style="margin-right:10px;">Book Slot</button>
+</form>
+</div>
+
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="text-center"> 
+        <div class="subbox"> 
+<h2>Show Parking Slot</h2>
+
+<div class="text-danger" *ngIf="deletemessage">{{deletemessage}}</div>
+
+<table class="table">
+    <tr>
+        <th>Sloat Number</th>
+        <th>Registration Number</th>
+        <th>Color</th>
+        <th>Remove</th>
+
+    </tr>
+     <tr *ngFor='let car of carList'>
+        <td>{{car.id}}</td>
+        <td>{{car.registernumber}}</td>
+        <td>{{car.color}}</td>
+        <tb><button  (click)="removeSlot(car.id)" class="btn btn-danger">Remove</button></tb> 
+    </tr> 
+</table>
+
+</div> 
+
+</div>
+
+</div>
+
+</div>

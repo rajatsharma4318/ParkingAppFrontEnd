@@ -1,0 +1,19 @@
+.formbox{
+
+    margin-top: 50px;
+    border-radius: 2px;
+}
+.subbox{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.box{
+    width: 200px;
+    height: 100px;
+    margin-bottom: 20px;
+    background-color: midnightblue;
+    color:white;
+
+  
+}

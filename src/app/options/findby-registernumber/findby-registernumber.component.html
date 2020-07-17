@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+               
+             <h2 style="margin-top:30px">Find Car Slot By Register Number</h2>
+             <br>
+             <br>
+             <input type="text" name="registernumber" [(ngModel)]="registernumber" class="form-control" placeholder="enter register number like..KA-01-HH-0000.etc">
+              <br>
+              <button class="btn btn-warning" (click)="findCarByRegisterNumber()">Search</button> 
+        </div>
+        
+        <div class="col-md-6">
+            <button class="btn btn-danger" *ngIf="errormsg" >{{errormsg}}</button>
+            <h3 style="margin-top: 30px; text-align:center;">Booked Parking Slot</h3>
+           <table class="table">
+            <tr>
+                <th>Slot</th>
+                <th>Register Number</th>
+                <th>Color</th>
+            </tr>
+            <tr>
+                <td>{{car.id}}</td>
+                <td>{{car.registernumber}}</td>
+                <td>{{car.color}}</td>
+            </tr>
+
+           </table>
+        </div>
+   <div>
+
+</div>
