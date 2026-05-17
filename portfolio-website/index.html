@@ -1,291 +1,363 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name | Portfolio</title>
+export default function STECHPortfolio() {
+  const services = [
+    "Mechanical Drafting & Designing",
+    "2D Technical Drawings",
+    "3D CAD Modeling",
+    "Industrial Rendering",
+    "BOM & Data Sheet Customization",
+    "Civil & Electrical Drawings",
+  ];
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  const clients = [
+    "Hindustan Zinc Limited (Vedanta)",
+    "Mine Technical Service",
+    "Monomark Engineering Pvt. Ltd.",
+    "MM Engineering",
+    "Remon Engineering",
+    "Balaji Construction",
+    "Grossmecht Eng. Pvt. Ltd.",
+    "Nakoda Infrasteel Pvt. Ltd.",
+    "3S Minerals Processor Pvt. Ltd.",
+    "JK Engineering",
+    "Laxyo Energy Ltd",
+  ];
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  const projects = [
+    {
+      title: "Emergency Escape Route – RD Mine",
+      description:
+        "Designed and engineered underground emergency escape systems with installation planning and safety-first execution.",
+    },
+    {
+      title: "Industrial Rail Trolley System",
+      description:
+        "Complete trolley with rail-track engineering solution for mining transportation infrastructure.",
+    },
+    {
+      title: "Rod Mill Liners – SK Mine",
+      description:
+        "Precision CAD drafting and industrial manufacturing detailing for rod mill liner systems.",
+    },
+    {
+      title: "Machine Guarding – Rampura Agucha Mine",
+      description:
+        "Heavy-duty industrial safety guarding system designed for mining operations.",
+    },
+    {
+      title: "Refuge Chamber – Agucha Mine",
+      description:
+        "Critical underground refuge chamber engineering with safety compliance and structural optimization.",
+    },
+    {
+      title: "800mm Conveyor Layout",
+      description:
+        "Large-scale conveyor layout engineering and optimized material handling flow design.",
+    },
+    {
+      title: "Blasting Face Protection Cage",
+      description:
+        "Protective structural design solution engineered for underground mining blast zones.",
+    },
+    {
+      title: "Rolling Crusher & Vibrating Screen System",
+      description:
+        "Integrated industrial processing system with elevator and screw classifier engineering.",
+    },
+  ];
 
-  <style>
-    *{
-      font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
-    }
+  return (
+    <div className="min-h-screen bg-neutral-950 text-white font-sans">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden border-b border-neutral-800">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-blue-500/10" />
 
-    body{
-      background: #050816;
-      color: white;
-      overflow-x: hidden;
-    }
+        <div className="relative max-w-7xl mx-auto px-6 py-24 lg:py-32">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 border border-orange-500/30 bg-orange-500/10 px-4 py-2 rounded-full text-sm text-orange-300 mb-8">
+                Enterprise Engineering & Industrial Design Solutions
+              </div>
 
-    .gradient-text{
-      background: linear-gradient(to right,#00f5ff,#9d4edd);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+              <h1 className="text-5xl lg:text-7xl font-black leading-tight tracking-tight">
+                S TECH
+                <span className="block text-orange-400">ENGINEERING</span>
+              </h1>
 
-    .glass{
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
+              <p className="mt-8 text-lg text-neutral-300 leading-relaxed max-w-2xl">
+                Delivering high-precision engineering drafting, industrial design,
+                CAD modeling, and mining infrastructure solutions for large-scale
+                industrial operations across India.
+              </p>
 
-    .glow{
-      box-shadow: 0 0 25px rgba(0,245,255,0.4);
-    }
+              <div className="mt-10 flex flex-wrap gap-4">
+                <button className="bg-orange-500 hover:bg-orange-400 transition-all duration-300 px-7 py-4 rounded-2xl font-semibold text-black shadow-2xl shadow-orange-500/20">
+                  View Projects
+                </button>
 
-    .card:hover{
-      transform: translateY(-10px);
-      transition: 0.4s;
-    }
+                <button className="border border-neutral-700 hover:border-neutral-500 transition-all duration-300 px-7 py-4 rounded-2xl font-semibold">
+                  Contact Company
+                </button>
+              </div>
 
-    .hero-bg{
-      background:
-      radial-gradient(circle at top left,#0ea5e950,transparent 30%),
-      radial-gradient(circle at bottom right,#9333ea50,transparent 30%);
-    }
-  </style>
-</head>
+              <div className="grid grid-cols-3 gap-6 mt-16">
+                <div>
+                  <h3 className="text-4xl font-black text-orange-400">50+</h3>
+                  <p className="text-neutral-400 mt-2">Industrial Projects</p>
+                </div>
+                <div>
+                  <h3 className="text-4xl font-black text-orange-400">10+</h3>
+                  <p className="text-neutral-400 mt-2">Major Clients</p>
+                </div>
+                <div>
+                  <h3 className="text-4xl font-black text-orange-400">100%</h3>
+                  <p className="text-neutral-400 mt-2">Engineering Focus</p>
+                </div>
+              </div>
+            </div>
 
-<body>
+            <div className="relative">
+              <div className="bg-neutral-900 border border-neutral-800 rounded-[2rem] p-8 shadow-2xl">
+                <div className="flex items-center justify-between mb-8">
+                  <h3 className="text-2xl font-bold">Core Capabilities</h3>
+                  <div className="w-4 h-4 rounded-full bg-green-400 animate-pulse" />
+                </div>
 
-<!-- NAVBAR -->
-<nav class="fixed w-full top-0 z-50 glass px-10 py-4 flex justify-between items-center">
+                <div className="space-y-5">
+                  {services.map((service, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between bg-neutral-950 border border-neutral-800 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold">
+                          {index + 1}
+                        </div>
+                        <span className="font-medium">{service}</span>
+                      </div>
 
-  <h1 class="text-2xl font-bold gradient-text">
-    YourPortfolio
-  </h1>
+                      <span className="text-green-400 text-sm">Active</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <div class="space-x-6 hidden md:flex">
-    <a href="#home" class="hover:text-cyan-400">Home</a>
-    <a href="#about" class="hover:text-cyan-400">About</a>
-    <a href="#projects" class="hover:text-cyan-400">Projects</a>
-    <a href="#skills" class="hover:text-cyan-400">Skills</a>
-    <a href="#contact" class="hover:text-cyan-400">Contact</a>
-  </div>
+      {/* About Section */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <p className="text-orange-400 uppercase tracking-[0.3em] text-sm font-semibold">
+              About Company
+            </p>
 
-</nav>
+            <h2 className="text-4xl lg:text-5xl font-black mt-6 leading-tight">
+              Engineering Excellence for Industrial & Mining Infrastructure
+            </h2>
 
-<!-- HERO -->
-<section id="home" class="min-h-screen flex items-center justify-center hero-bg px-6">
+            <p className="mt-8 text-neutral-300 leading-relaxed text-lg">
+              S TECH Engineering specializes in industrial drafting, mining
+              infrastructure solutions, mechanical system design, and CAD
+              engineering services. Our expertise spans across mechanical,
+              civil, and electrical engineering domains with enterprise-grade
+              execution standards.
+            </p>
 
-  <div class="text-center">
+            <p className="mt-6 text-neutral-400 leading-relaxed">
+              We collaborate with leading industrial and mining organizations,
+              delivering highly accurate engineering documentation, 3D models,
+              structural layouts, fabrication-ready drawings, and industrial
+              safety systems.
+            </p>
+          </div>
 
-    <h2 class="text-5xl md:text-7xl font-bold mb-6">
-      Hi, I'm
-      <span class="gradient-text">Your Name</span>
-    </h2>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8">
+              <h3 className="text-5xl font-black text-orange-400">2D</h3>
+              <p className="mt-4 text-neutral-300 font-medium">
+                Precision Technical Drawings
+              </p>
+            </div>
 
-    <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-      Full Stack Developer • AI Enthusiast • UI/UX Creator
-    </p>
+            <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 mt-10">
+              <h3 className="text-5xl font-black text-orange-400">3D</h3>
+              <p className="mt-4 text-neutral-300 font-medium">
+                CAD Modeling & Rendering
+              </p>
+            </div>
 
-    <div class="mt-10 flex justify-center gap-5 flex-wrap">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 -mt-6">
+              <h3 className="text-5xl font-black text-orange-400">BOM</h3>
+              <p className="mt-4 text-neutral-300 font-medium">
+                Reports & Documentation
+              </p>
+            </div>
 
-      <a href="#projects"
-        class="bg-cyan-400 text-black px-8 py-4 rounded-full font-semibold hover:scale-105 transition glow">
-        View Projects
-      </a>
+            <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 mt-6">
+              <h3 className="text-5xl font-black text-orange-400">CAD</h3>
+              <p className="mt-4 text-neutral-300 font-medium">
+                Enterprise Engineering Workflow
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <a href="https://github.com/YOUR_USERNAME"
-        target="_blank"
-        class="border border-cyan-400 px-8 py-4 rounded-full hover:bg-cyan-400 hover:text-black transition">
-        GitHub
-      </a>
+      {/* Projects Section */}
+      <section className="bg-neutral-900/40 border-y border-neutral-800">
+        <div className="max-w-7xl mx-auto px-6 py-24">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
+            <div>
+              <p className="text-orange-400 uppercase tracking-[0.3em] text-sm font-semibold">
+                Featured Projects
+              </p>
 
+              <h2 className="text-4xl lg:text-5xl font-black mt-6">
+                Major Industrial Accomplishments
+              </h2>
+            </div>
+
+            <p className="text-neutral-400 max-w-xl leading-relaxed">
+              A portfolio of industrial-grade engineering projects executed for
+              mining, manufacturing, and infrastructure companies.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="group bg-neutral-950 border border-neutral-800 hover:border-orange-500/50 rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-1"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-orange-400 font-bold text-lg">
+                    0{index + 1}
+                  </span>
+
+                  <div className="w-12 h-12 rounded-2xl bg-orange-500/10 group-hover:bg-orange-500/20 transition-all duration-300 flex items-center justify-center">
+                    ↗
+                  </div>
+                </div>
+
+                <h3 className="text-2xl font-bold mt-8 leading-snug">
+                  {project.title}
+                </h3>
+
+                <p className="mt-5 text-neutral-400 leading-relaxed text-base">
+                  {project.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Clients Section */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className="text-center mb-16">
+          <p className="text-orange-400 uppercase tracking-[0.3em] text-sm font-semibold">
+            Trusted By Industry Leaders
+          </p>
+
+          <h2 className="text-4xl lg:text-5xl font-black mt-6">
+            Strategic Industrial Partnerships
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {clients.map((client, index) => (
+            <div
+              key={index}
+              className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 hover:border-orange-500/40 transition-all duration-300"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-400 font-black">
+                  {client.charAt(0)}
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg leading-snug">
+                    {client}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="max-w-7xl mx-auto px-6 pb-24">
+        <div className="relative overflow-hidden rounded-[3rem] border border-orange-500/20 bg-gradient-to-br from-orange-500/20 via-neutral-900 to-neutral-950 p-12 lg:p-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.15),transparent_35%)]" />
+
+          <div className="relative grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="text-orange-300 uppercase tracking-[0.3em] text-sm font-semibold">
+                Let’s Build the Future
+              </p>
+
+              <h2 className="text-4xl lg:text-6xl font-black mt-6 leading-tight">
+                Enterprise Engineering Solutions Built for Scale
+              </h2>
+
+              <p className="mt-8 text-neutral-300 text-lg leading-relaxed max-w-2xl">
+                We help industrial and mining businesses transform concepts into
+                production-ready engineering systems with precision drafting,
+                modeling, and execution planning.
+              </p>
+            </div>
+
+            <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 lg:p-10">
+              <h3 className="text-2xl font-bold">Why Clients Choose Us</h3>
+
+              <div className="mt-8 space-y-6">
+                {[
+                  "Enterprise-grade engineering quality",
+                  "Mining & industrial specialization",
+                  "Accurate fabrication-ready drafting",
+                  "Professional documentation workflow",
+                  "Scalable CAD engineering solutions",
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="w-7 h-7 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold text-sm mt-1">
+                      ✓
+                    </div>
+
+                    <p className="text-neutral-200 text-lg">{item}</p>
+                  </div>
+                ))}
+              </div>
+
+              <button className="w-full mt-10 bg-orange-500 hover:bg-orange-400 transition-all duration-300 text-black font-bold py-4 rounded-2xl text-lg shadow-xl shadow-orange-500/20">
+                Schedule Business Discussion
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-neutral-800">
+        <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 className="text-2xl font-black">
+              S TECH <span className="text-orange-400">ENGINEERING</span>
+            </h3>
+            <p className="text-neutral-500 mt-2">
+              Industrial Engineering • CAD Design • Mining Infrastructure
+            </p>
+          </div>
+
+          <div className="flex items-center gap-8 text-neutral-400 text-sm">
+            <span>Enterprise Ready Portfolio</span>
+            <span>Professional Engineering Brand</span>
+            <span>GitHub Presentation Optimized</span>
+          </div>
+        </div>
+      </footer>
     </div>
-
-  </div>
-
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="py-24 px-6">
-
-  <div class="max-w-6xl mx-auto">
-
-    <h2 class="text-4xl font-bold mb-10 gradient-text">
-      About Me
-    </h2>
-
-    <div class="glass rounded-3xl p-10">
-
-      <p class="text-gray-300 leading-8 text-lg">
-        I'm a passionate developer focused on creating modern web experiences,
-        AI applications, and scalable digital products.
-        I love building beautiful interfaces and solving real-world problems using technology.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="py-24 px-6">
-
-  <div class="max-w-7xl mx-auto">
-
-    <h2 class="text-4xl font-bold mb-16 gradient-text text-center">
-      Featured Projects
-    </h2>
-
-    <div class="grid md:grid-cols-3 gap-8">
-
-      <!-- CARD -->
-      <div class="glass rounded-3xl p-6 card">
-
-        <img
-          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
-          class="rounded-2xl mb-5 h-52 w-full object-cover"
-        />
-
-        <h3 class="text-2xl font-semibold mb-3">
-          AI Chatbot
-        </h3>
-
-        <p class="text-gray-400 mb-5">
-          AI-powered assistant using OpenAI APIs with modern UI.
-        </p>
-
-        <a href="#"
-          class="text-cyan-400 hover:underline">
-          View Project →
-        </a>
-
-      </div>
-
-      <!-- CARD -->
-      <div class="glass rounded-3xl p-6 card">
-
-        <img
-          src="https://images.unsplash.com/photo-1556740749-887f6717d7e4"
-          class="rounded-2xl mb-5 h-52 w-full object-cover"
-        />
-
-        <h3 class="text-2xl font-semibold mb-3">
-          E-Commerce Platform
-        </h3>
-
-        <p class="text-gray-400 mb-5">
-          Full stack shopping website with payments and dashboard.
-        </p>
-
-        <a href="#"
-          class="text-cyan-400 hover:underline">
-          View Project →
-        </a>
-
-      </div>
-
-      <!-- CARD -->
-      <div class="glass rounded-3xl p-6 card">
-
-        <img
-          src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4"
-          class="rounded-2xl mb-5 h-52 w-full object-cover"
-        />
-
-        <h3 class="text-2xl font-semibold mb-3">
-          Portfolio Website
-        </h3>
-
-        <p class="text-gray-400 mb-5">
-          Modern animated personal portfolio with dark futuristic UI.
-        </p>
-
-        <a href="#"
-          class="text-cyan-400 hover:underline">
-          View Project →
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="py-24 px-6">
-
-  <div class="max-w-6xl mx-auto">
-
-    <h2 class="text-4xl font-bold mb-16 gradient-text text-center">
-      Skills
-    </h2>
-
-    <div class="flex flex-wrap justify-center gap-5">
-
-      <span class="glass px-6 py-3 rounded-full">HTML</span>
-      <span class="glass px-6 py-3 rounded-full">CSS</span>
-      <span class="glass px-6 py-3 rounded-full">JavaScript</span>
-      <span class="glass px-6 py-3 rounded-full">React</span>
-      <span class="glass px-6 py-3 rounded-full">Node.js</span>
-      <span class="glass px-6 py-3 rounded-full">MongoDB</span>
-      <span class="glass px-6 py-3 rounded-full">Python</span>
-      <span class="glass px-6 py-3 rounded-full">Tailwind CSS</span>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="py-24 px-6">
-
-  <div class="max-w-4xl mx-auto text-center">
-
-    <h2 class="text-4xl font-bold mb-10 gradient-text">
-      Contact Me
-    </h2>
-
-    <div class="glass rounded-3xl p-10">
-
-      <p class="text-gray-300 mb-8">
-        Let's build something amazing together 🚀
-      </p>
-
-      <div class="flex justify-center gap-6 flex-wrap">
-
-        <a href="mailto:youremail@gmail.com"
-          class="bg-cyan-400 text-black px-8 py-4 rounded-full font-semibold hover:scale-105 transition">
-          Email Me
-        </a>
-
-        <a href="https://github.com/YOUR_USERNAME"
-          target="_blank"
-          class="border border-cyan-400 px-8 py-4 rounded-full hover:bg-cyan-400 hover:text-black transition">
-          GitHub
-        </a>
-
-        <a href="https://linkedin.com"
-          target="_blank"
-          class="border border-cyan-400 px-8 py-4 rounded-full hover:bg-cyan-400 hover:text-black transition">
-          LinkedIn
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- FOOTER -->
-<footer class="py-8 text-center text-gray-500 border-t border-gray-800">
-
-  © 2026 Your Name • Built with ❤️ using Tailwind CSS
-
-</footer>
-
-</body>
-</html>
+  );
+}
