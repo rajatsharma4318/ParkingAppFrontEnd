@@ -1,474 +1,1115 @@
-export default function STECHPortfolio() {
-  const founder = {
-    name: "Satyam Sharma",
-    role: "Founder & Lead Engineering Designer",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1200&auto=format&fit=crop",
-  };
-  const services = [
-    {
-      title: "Mechanical Engineering Design",
-      desc: "Industrial mechanical drafting, fabrication drawings, machine assemblies, and mining equipment engineering.",
-    },
-    {
-      title: "2D Technical Drawings",
-      desc: "Production-ready engineering drawings with dimensional accuracy and industrial documentation standards.",
-    },
-    {
-      title: "3D CAD Modeling",
-      desc: "Advanced 3D modeling for industrial systems, conveyors, mining infrastructure, and fabrication projects.",
-    },
-    {
-      title: "Industrial Rendering",
-      desc: "Realistic engineering renders and visual presentations for project approvals and execution planning.",
-    },
-    {
-      title: "BOM & Data Sheets",
-      desc: "Custom Bill of Materials, project documentation, engineering reports, and compliance-ready data sheets.",
-    },
-    {
-      title: "Electrical & Civil Drafting",
-      desc: "Integrated civil and electrical engineering drawings for industrial infrastructure projects.",
-    },
-  ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$ Tech Engineering — Design & Engineering Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --panel: #161616;
+    --border: #2a2a2a;
+    --gold: #c8a84b;
+    --gold-light: #e4c97a;
+    --gold-dim: #8a7030;
+    --white: #f0ede6;
+    --muted: #888;
+    --teal: #2bbfa4;
+  }
 
-  const clients = [
-    "Hindustan Zinc Limited (Vedanta)",
-    "Mine Technical Service",
-    "Monomark Engineering Pvt. Ltd.",
-    "MM Engineering",
-    "Remon Engineering",
-    "Balaji Construction",
-    "Grossmecht Eng. Pvt. Ltd.",
-    "Nakoda Infrasteel Pvt. Ltd.",
-    "3S Minerals Processor Pvt. Ltd.",
-    "JK Engineering",
-    "Laxyo Energy Ltd",
-  ];
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  const projects = [
-    {
-      title: "Emergency Escape Route – RD Mine",
-      description:
-        "Designed emergency underground escape route systems with installation arrangements and mining safety compliance planning for Hindustan Zinc Limited.",
-      category: "Mining Safety Infrastructure",
-    },
-    {
-      title: "Industrial Rail Trolley System",
-      description:
-        "Designed and developed complete trolley systems with integrated rail tracks for Mine Technical Service operations.",
-      category: "Industrial Transportation",
-    },
-    {
-      title: "Rod Mill Liners – SK Mine",
-      description:
-        "Precision drafting and industrial detailing for rod mill liner systems used in large-scale mining operations.",
-      category: "Mechanical Engineering",
-    },
-    {
-      title: "Machine Guarding – Rampura Agucha Mine",
-      description:
-        "Developed industrial machine guarding systems to improve operational safety and heavy equipment protection.",
-      category: "Industrial Safety",
-    },
-    {
-      title: "Refuge Chamber – Agucha Mine",
-      description:
-        "Engineered underground refuge chamber systems designed for worker safety and emergency response infrastructure.",
-      category: "Mining Infrastructure",
-    },
-    {
-      title: "Normet PC Cassette – RA Mine",
-      description:
-        "Designed and modeled heavy-duty Normet PC cassette engineering components for mining operational support.",
-      category: "Industrial Equipment",
-    },
-    {
-      title: "800mm Conveyor Layout – RD Mine",
-      description:
-        "Created detailed conveyor layout engineering drawings for optimized material handling and industrial workflow.",
-      category: "Material Handling Systems",
-    },
-    {
-      title: "Blasting Face Protection Cage",
-      description:
-        "Developed protective structural cage systems for underground blasting operations and worker safety enhancement.",
-      category: "Mining Safety",
-    },
-    {
-      title: "Rolling Crusher & Vibrating Screen",
-      description:
-        "Industrial processing system engineering including crushers, vibrating screens, elevators, and screw classifiers.",
-      category: "Mineral Processing",
-    },
-    {
-      title: "Magnetic Elevator & Screw Classifier",
-      description:
-        "Advanced material processing system with magnetic elevator integration and industrial classifier design.",
-      category: "Industrial Systems",
-    },
-    {
-      title: "SK Mine Cage & Skip Partition Wall",
-      description:
-        "Structural engineering and drafting solutions for mine cage systems and underground partition infrastructure.",
-      category: "Structural Engineering",
-    },
-    {
-      title: "Ferrule Trolley – Hydro Project",
-      description:
-        "Custom trolley engineering system developed for hydro infrastructure and industrial handling operations.",
-      category: "Hydro Engineering",
-    },
-  ];
+  html { scroll-behavior: smooth; }
 
-  return (
-    <div className="min-h-screen bg-[#050816] text-white font-sans overflow-x-hidden selection:bg-orange-500 selection:text-black">
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-3xl rounded-full" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-500/10 blur-3xl rounded-full" />
-      </div>
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
 
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-2xl bg-black/20 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-black tracking-tight bg-gradient-to-r from-cyan-400 to-orange-400 bg-clip-text text-transparent">
-              S TECH ENGINEERING
-            </h1>
-          </div>
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
 
-          <div className="hidden md:flex items-center gap-8 text-sm text-neutral-300">
-            <a href="#" className="hover:text-cyan-400 transition-all duration-300">Home</a>
-            <a href="#" className="hover:text-cyan-400 transition-all duration-300">Services</a>
-            <a href="#" className="hover:text-cyan-400 transition-all duration-300">Projects</a>
-            <a href="#" className="hover:text-cyan-400 transition-all duration-300">Clients</a>
-            <a href="#" className="hover:text-cyan-400 transition-all duration-300">Contact</a>
-          </div>
-        </div>
-      </nav>
-      {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-white/10 pt-32">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-blue-500/10" />
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+  }
 
-        <div className="relative max-w-7xl mx-auto px-6 py-24 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 border border-orange-500/30 bg-orange-500/10 px-4 py-2 rounded-full text-sm text-orange-300 mb-8">
-                Enterprise Engineering & Industrial Design Solutions
-              </div>
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+  }
 
-              <h1 className="text-5xl lg:text-7xl font-black leading-tight tracking-tight">
-                S TECH
-                <span className="block text-orange-400">ENGINEERING</span>
-              </h1>
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
 
-              <p className="mt-8 text-lg text-neutral-300 leading-relaxed max-w-2xl">
-                Delivering high-precision engineering drafting, industrial design,
-                CAD modeling, and mining infrastructure solutions for large-scale
-                industrial operations across India.
-              </p>
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
 
-              <div className="mt-10 flex flex-wrap gap-4">
-                <button className="bg-gradient-to-r from-cyan-400 to-orange-400 hover:scale-105 transition-all duration-300 px-8 py-4 rounded-full font-bold text-black shadow-[0_0_40px_rgba(34,211,238,0.35)]">
-                  View Projects
-                </button>
+  .nav-links a:hover { color: var(--gold); }
 
-                <button className="border border-cyan-400/40 hover:bg-cyan-400 hover:text-black transition-all duration-300 px-8 py-4 rounded-full font-semibold backdrop-blur-xl">
-                  Contact Company
-                </button>
-              </div>
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 10px 22px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
 
-              <div className="grid grid-cols-3 gap-6 mt-16">
-                <div>
-                  <h3 className="text-4xl font-black text-orange-400">50+</h3>
-                  <p className="text-neutral-400 mt-2">Industrial Projects</p>
-                </div>
-                <div>
-                  <h3 className="text-4xl font-black text-orange-400">10+</h3>
-                  <p className="text-neutral-400 mt-2">Major Clients</p>
-                </div>
-                <div>
-                  <h3 className="text-4xl font-black text-orange-400">100%</h3>
-                  <p className="text-neutral-400 mt-2">Engineering Focus</p>
-                </div>
-              </div>
-            </div>
+  .nav-cta:hover { background: var(--gold-light); }
 
-            <div className="relative flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-xl">
-                <div className="absolute -top-10 -left-10 w-48 h-48 bg-orange-500/20 blur-3xl rounded-full" />
-                <div className="absolute bottom-0 right-0 w-56 h-56 bg-blue-500/10 blur-3xl rounded-full" />
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
 
-                <div className="relative bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 shadow-[0_20px_80px_rgba(0,0,0,0.45)] overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.15),transparent_30%)]" />
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,168,75,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,168,75,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
 
-                  <div className="relative flex flex-col items-center text-center">
-                    <div className="relative">
-                      <div className="absolute inset-0 rounded-full bg-orange-500 blur-2xl opacity-30 scale-110" />
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 48px 80px 64px;
+    position: relative;
+    z-index: 2;
+  }
 
-                      <img
-                        src={founder.image}
-                        alt={founder.name}
-                        className="relative w-56 h-56 object-cover rounded-full border-4 border-orange-500 shadow-2xl shadow-orange-500/30"
-                      />
-                    </div>
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
 
-                    <h3 className="mt-8 text-3xl font-black tracking-tight">
-                      {founder.name}
-                    </h3>
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: var(--gold);
+  }
 
-                    <p className="mt-2 text-orange-300 font-medium text-lg">
-                      {founder.role}
-                    </p>
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
 
-                    <p className="mt-6 text-neutral-400 leading-relaxed max-w-md">
-                      Delivering precision engineering, industrial drafting,
-                      mining infrastructure systems, and enterprise-grade CAD
-                      execution for industrial clients and large-scale operations.
-                    </p>
-                  </div>
+  .hero-title span { color: var(--gold); }
 
-                  <div className="relative mt-10 grid grid-cols-2 gap-5">
-                    <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
-                      <h4 className="text-4xl font-black text-orange-400">10+</h4>
-                      <p className="mt-2 text-neutral-400 text-sm">
-                        Enterprise Clients
-                      </p>
-                    </div>
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #aaa;
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
 
-                    <div className="bg-black/40 border border-white/10 rounded-3xl p-6 text-center">
-                      <h4 className="text-4xl font-black text-orange-400">50+</h4>
-                      <p className="mt-2 text-neutral-400 text-sm">
-                        Industrial Projects
-                      </p>
-                    </div>
-                  </div>
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center;
+  }
 
-                  <div className="relative mt-8 bg-gradient-to-r from-cyan-400 to-orange-400 text-black rounded-3xl p-6 font-black text-center shadow-[0_0_40px_rgba(34,211,238,0.25)]">
-                    Trusted Engineering Partner for Industrial & Mining Solutions
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 16px 32px;
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
 
-      {/* About Section */}
-      <section className="max-w-7xl mx-auto px-6 py-28">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <p className="text-orange-400 uppercase tracking-[0.3em] text-sm font-semibold">
-              About Company
-            </p>
+  .btn-primary::after {
+    content: '→';
+    margin-left: 10px;
+  }
 
-            <h2 className="text-4xl lg:text-5xl font-black mt-6 leading-tight">
-              Engineering Excellence for Industrial & Mining Infrastructure
-            </h2>
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-            <p className="mt-8 text-neutral-300 leading-relaxed text-lg">
-              S TECH Engineering specializes in industrial drafting, mining
-              infrastructure solutions, mechanical system design, and CAD
-              engineering services. Our expertise spans across mechanical,
-              civil, and electrical engineering domains with enterprise-grade
-              execution standards.
-            </p>
+  .btn-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 16px 32px;
+    text-decoration: none;
+    border: 1px solid var(--gold-dim);
+    transition: all 0.2s;
+  }
 
-            <p className="mt-6 text-neutral-400 leading-relaxed">
-              We collaborate with leading industrial and mining organizations,
-              delivering highly accurate engineering documentation, 3D models,
-              structural layouts, fabrication-ready drawings, and industrial
-              safety systems.
-            </p>
-          </div>
+  .btn-secondary:hover { border-color: var(--gold); background: rgba(200,168,75,0.05); }
 
-          <div className="grid grid-cols-2 gap-6">
-            <div className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 hover:-translate-y-2 transition-all duration-300 hover:border-cyan-400/30">
-              <h3 className="text-5xl font-black text-orange-400">2D</h3>
-              <p className="mt-4 text-neutral-300 font-medium">
-                Precision Technical Drawings
-              </p>
-            </div>
+  .hero-right {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
 
-            <div className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 mt-10 hover:-translate-y-2 transition-all duration-300 hover:border-cyan-400/30">
-              <h3 className="text-5xl font-black text-orange-400">3D</h3>
-              <p className="mt-4 text-neutral-300 font-medium">
-                CAD Modeling & Rendering
-              </p>
-            </div>
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(43,191,164,0.06) 0%, rgba(200,168,75,0.08) 100%);
+  }
 
-            <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 -mt-6">
-              <h3 className="text-5xl font-black text-orange-400">BOM</h3>
-              <p className="mt-4 text-neutral-300 font-medium">
-                Reports & Documentation
-              </p>
-            </div>
+  .hero-badge-cluster {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 48px;
+  }
 
-            <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 mt-6">
-              <h3 className="text-5xl font-black text-orange-400">CAD</h3>
-              <p className="mt-4 text-neutral-300 font-medium">
-                Enterprise Engineering Workflow
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.6s ease both;
+  }
 
-      {/* Projects Section */}
-      <section className="bg-neutral-900/40 border-y border-neutral-800">
-        <div className="max-w-7xl mx-auto px-6 py-24">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
-            <div>
-              <p className="text-orange-400 uppercase tracking-[0.3em] text-sm font-semibold">
-                Featured Projects
-              </p>
+  .stat-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
 
-              <h2 className="text-4xl lg:text-5xl font-black mt-6">
-                Major Industrial Accomplishments
-              </h2>
-            </div>
+  .stat-card:nth-child(1) { animation-delay: 0.1s; }
+  .stat-card:nth-child(2) { animation-delay: 0.2s; }
+  .stat-card:nth-child(3) { animation-delay: 0.3s; }
+  .stat-card:nth-child(4) { animation-delay: 0.4s; }
 
-            <p className="text-neutral-400 max-w-xl leading-relaxed">
-              A portfolio of industrial-grade engineering projects executed for
-              mining, manufacturing, and infrastructure companies.
-            </p>
-          </div>
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.2rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
 
-          <div className="grid lg:grid-cols-2 gap-10">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden bg-gradient-to-br from-neutral-950 to-neutral-900 border border-neutral-800 hover:border-orange-500/50 rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(255,165,0,0.08)]"
-              >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.12),transparent_40%)]" />
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 
-                <div className="relative flex items-center justify-between">
-                  <span className="text-orange-400 font-bold text-lg">
-                    0{index + 1}
-                  </span>
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 64px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 12px;
+    z-index: 2;
+  }
 
-                  <div className="w-12 h-12 rounded-2xl bg-orange-500/10 group-hover:bg-orange-500/20 transition-all duration-300 flex items-center justify-center">
-                    ↗
-                  </div>
-                </div>
+  .hero-scroll::after {
+    content: '';
+    display: block; width: 1px; height: 40px;
+    background: var(--border);
+    animation: scrollPulse 2s ease infinite;
+  }
 
-                <h3 className="text-2xl font-bold mt-8 leading-snug">
-                  {project.title}
-                </h3>
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
+  }
 
-                <p className="mt-5 text-neutral-400 leading-relaxed text-base">
-                  {project.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+  /* ── SECTION BASE ── */
+  section {
+    padding: 120px 64px;
+    position: relative;
+  }
 
-      {/* Clients Section */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className="text-center mb-16">
-          <p className="text-orange-400 uppercase tracking-[0.3em] text-sm font-semibold">
-            Trusted By Industry Leaders
-          </p>
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
 
-          <h2 className="text-4xl lg:text-5xl font-black mt-6">
-            Strategic Industrial Partnerships
-          </h2>
-        </div>
+  .section-label::before {
+    content: '';
+    display: inline-block; width: 28px; height: 1px;
+    background: var(--gold);
+  }
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {clients.map((client, index) => (
-            <div
-              key={index}
-              className="group bg-gradient-to-br from-neutral-900 to-black border border-neutral-800 rounded-3xl p-7 hover:border-orange-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-400 font-black">
-                  {client.charAt(0)}
-                </div>
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
 
-                <div>
-                  <h3 className="font-semibold text-lg leading-snug">
-                    {client}
-                  </h3>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 64px;
+  }
 
-      {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="relative overflow-hidden rounded-[3rem] border border-orange-500/20 bg-gradient-to-br from-orange-500/20 via-neutral-900 to-neutral-950 p-12 lg:p-20">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.15),transparent_35%)]" />
+  /* ── SERVICES ── */
+  #services { background: var(--off-black); }
 
-          <div className="relative grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-orange-300 uppercase tracking-[0.3em] text-sm font-semibold">
-                Let’s Build the Future
-              </p>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
 
-              <h2 className="text-4xl lg:text-6xl font-black mt-6 leading-tight">
-                Enterprise Engineering Solutions Built for Scale
-              </h2>
+  .service-card {
+    background: var(--off-black);
+    padding: 40px 32px;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
 
-              <p className="mt-8 text-neutral-300 text-lg leading-relaxed max-w-2xl">
-                We help industrial and mining businesses transform concepts into
-                production-ready engineering systems with precision drafting,
-                modeling, and execution planning.
-              </p>
-            </div>
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 0;
+    background: linear-gradient(to top, rgba(200,168,75,0.05), transparent);
+    transition: height 0.3s;
+  }
 
-            <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 lg:p-10">
-              <h3 className="text-2xl font-bold">Why Clients Choose Us</h3>
+  .service-card:hover { background: #1a1a1a; }
+  .service-card:hover::after { height: 100%; }
 
-              <div className="mt-8 space-y-6">
-                {[
-                  "Enterprise-grade engineering quality",
-                  "Mining & industrial specialization",
-                  "Accurate fabrication-ready drafting",
-                  "Professional documentation workflow",
-                  "Scalable CAD engineering solutions",
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-7 h-7 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold text-sm mt-1">
-                      ✓
-                    </div>
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    display: block;
+  }
 
-                    <p className="text-neutral-200 text-lg">{item}</p>
-                  </div>
-                ))}
-              </div>
+  .service-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
 
-              <button className="w-full mt-10 bg-orange-500 hover:bg-orange-400 transition-all duration-300 text-black font-bold py-4 rounded-2xl text-lg shadow-xl shadow-orange-500/20">
-                Schedule Business Discussion
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+  .service-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
 
-      {/* Footer */}
-      <footer className="border-t border-neutral-800">
-        <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-2xl font-black">
-              S TECH <span className="text-orange-400">ENGINEERING</span>
-            </h3>
-            <p className="text-neutral-500 mt-2">
-              Industrial Engineering • CAD Design • Mining Infrastructure
-            </p>
-          </div>
+  .service-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 20px;
+  }
 
-          <div className="flex items-center gap-8 text-neutral-400 text-sm">
-            <span>Enterprise Ready Portfolio</span>
-            <span>Professional Engineering Brand</span>
-            <span>GitHub Presentation Optimized</span>
-          </div>
-        </div>
-      </footer>
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    background: rgba(200,168,75,0.07);
+    border: 1px solid rgba(200,168,75,0.15);
+    padding: 4px 10px;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--black); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold-dim);
+  }
+
+  .project-card:nth-child(1) { animation-delay: 0.05s; }
+  .project-card:nth-child(2) { animation-delay: 0.1s; }
+  .project-card:nth-child(3) { animation-delay: 0.15s; }
+  .project-card:nth-child(4) { animation-delay: 0.2s; }
+  .project-card:nth-child(5) { animation-delay: 0.25s; }
+  .project-card:nth-child(6) { animation-delay: 0.3s; }
+
+  .project-visual {
+    height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pv-1 { background: linear-gradient(135deg, #0f1f1a 0%, #0a2a24 100%); }
+  .pv-2 { background: linear-gradient(135deg, #1a1a0a 0%, #2a2400 100%); }
+  .pv-3 { background: linear-gradient(135deg, #0a0f1f 0%, #0a1a3a 100%); }
+  .pv-4 { background: linear-gradient(135deg, #1a0f0a 0%, #2a1800 100%); }
+  .pv-5 { background: linear-gradient(135deg, #0f1a0a 0%, #182800 100%); }
+  .pv-6 { background: linear-gradient(135deg, #1a0a1a 0%, #2a0028 100%); }
+
+  .project-visual::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 20px,
+      rgba(200,168,75,0.02) 20px, rgba(200,168,75,0.02) 21px
+    );
+  }
+
+  .project-num {
+    position: absolute; top: 12px; right: 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-dim);
+  }
+
+  .project-body { padding: 24px; }
+
+  .project-client {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  .project-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ── CLIENTS ── */
+  #clients { background: var(--off-black); }
+
+  .clients-marquee-wrapper {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0;
+    margin-bottom: 64px;
+  }
+
+  .clients-marquee {
+    display: flex; gap: 64px;
+    animation: marquee 22s linear infinite;
+    white-space: nowrap;
+  }
+
+  .client-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    color: var(--border);
+    transition: color 0.3s;
+    flex-shrink: 0;
+  }
+
+  .client-name:hover { color: var(--gold-dim); }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .testimonial-block {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 32px;
+    max-width: 800px;
+    padding: 40px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    position: relative;
+  }
+
+  .quote-icon {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 6rem;
+    color: var(--gold);
+    opacity: 0.2;
+    line-height: 1;
+    margin-top: -12px;
+  }
+
+  .quote-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #ccc;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  .quote-attr {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── CAPABILITIES ── */
+  #capabilities { background: var(--black); }
+
+  .cap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+
+  .cap-item {
+    background: var(--black);
+    padding: 32px;
+    display: flex; align-items: flex-start; gap: 20px;
+    transition: background 0.2s;
+  }
+
+  .cap-item:hover { background: #0e0e0e; }
+
+  .cap-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--border);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 48px;
+  }
+
+  .cap-content h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .cap-content p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--off-black);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-info { }
+
+  .contact-detail {
+    display: flex; gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact-detail:first-of-type { border-top: 1px solid var(--border); }
+
+  .contact-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .contact-value {
+    font-size: 0.9rem;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  .contact-right {
+    padding-top: 8px;
+  }
+
+  .software-stack {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 32px;
+  }
+
+  .stack-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .stack-items {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+
+  .stack-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    transition: all 0.2s;
+  }
+
+  .stack-item:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    background: rgba(200,168,75,0.06);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 32px 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+  }
+
+  .footer-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+  }
+
+  .footer-gstin {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: #3a3a3a;
+  }
+
+  /* ── DIVIDER ── */
+  .gold-divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left { animation: fadeUp 0.8s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 80px 24px 60px; }
+    section { padding: 80px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .cap-grid { grid-template-columns: 1fr; }
+    #contact { grid-template-columns: 1fr; gap: 40px; padding: 80px 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">$ Tech Engineering</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:s.techengineering03@gmail.com" class="nav-cta">Get a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">Bhilwara, Rajasthan · Est. India</div>
+    <h1 class="hero-title">
+      Precision<br>
+      <span>Engineering</span><br>
+      Design
+    </h1>
+    <p class="hero-desc">
+      End-to-end mechanical, electrical & civil drafting for mining, heavy industry, and infrastructure — from concept to fabrication-ready drawings.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-secondary">Contact Us</a>
     </div>
-  );
-}
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-badge-cluster">
+      <div class="stat-card">
+        <div class="stat-num">11+</div>
+        <div class="stat-label">Major Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Clients Served</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3D</div>
+        <div class="stat-label">Modeling & Render</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">CAD</div>
+        <div class="stat-label">Multi-Discipline</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">Full-Spectrum Design Services</h2>
+  <p class="section-sub">From concept sketches to BOM-ready documentation — we deliver across mechanical, electrical, and civil disciplines.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">✏️</span>
+      <div class="service-name">2D Drafting</div>
+      <p class="service-desc">Precise, standards-compliant 2D drawing sheets for manufacturing, installation, and documentation purposes.</p>
+      <div class="service-tags">
+        <span class="tag">AutoCAD</span>
+        <span class="tag">DWG / PDF</span>
+        <span class="tag">GD&T</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🧱</span>
+      <div class="service-name">3D Modeling</div>
+      <p class="service-desc">Detailed parametric 3D models with full assembly, motion studies, and photorealistic rendering for client presentations.</p>
+      <div class="service-tags">
+        <span class="tag">SolidWorks</span>
+        <span class="tag">Rendering</span>
+        <span class="tag">Assembly</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📋</span>
+      <div class="service-name">Technical Documentation</div>
+      <p class="service-desc">Customised reports, data sheets, and Bills of Materials structured for procurement and project management teams.</p>
+      <div class="service-tags">
+        <span class="tag">BOM</span>
+        <span class="tag">Data Sheets</span>
+        <span class="tag">Reports</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">⚙️</span>
+      <div class="service-name">Mechanical Engineering</div>
+      <p class="service-desc">Structural components, machinery layouts, conveyor systems, mine safety equipment, and industrial fabrication drawings.</p>
+      <div class="service-tags">
+        <span class="tag">Structural</span>
+        <span class="tag">Mining</span>
+        <span class="tag">Fabrication</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">⚡</span>
+      <div class="service-name">Electrical Drawing</div>
+      <p class="service-desc">Single-line diagrams, panel layouts, cable schedules, and instrumentation & control drawings for industrial facilities.</p>
+      <div class="service-tags">
+        <span class="tag">SLD</span>
+        <span class="tag">Panel Design</span>
+        <span class="tag">I&C</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🏗️</span>
+      <div class="service-name">Civil Drawing</div>
+      <p class="service-desc">Civil layout plans, structural drawings, foundation details, and site plans for construction and infrastructure projects.</p>
+      <div class="service-tags">
+        <span class="tag">Layout Plans</span>
+        <span class="tag">Structural</span>
+        <span class="tag">Infrastructure</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-title">Major Projects Delivered</h2>
+  <p class="section-sub">Engineering challenges solved for India's leading mining and industrial clients, with designs that have received recognition from C-suite leadership.</p>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-visual pv-1">🚨<span class="project-num">01</span></div>
+      <div class="project-body">
+        <div class="project-client">Hindustan Zinc — RD Mine</div>
+        <div class="project-name">Emergency Escape Route System</div>
+        <p class="project-desc">Full design of underground emergency escape route and installation arrangement, personally appreciated by the CEO of Hindustan Zinc, Mr. Arun Misra.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-visual pv-2">🚃<span class="project-num">02</span></div>
+      <div class="project-body">
+        <div class="project-client">Mine Technical Service</div>
+        <div class="project-name">Trolley & Whole Rails Track</div>
+        <p class="project-desc">Complete design of heavy-duty underground trolley system and rail track layout for mine material transport operations.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-visual pv-3">🔩<span class="project-num">03</span></div>
+      <div class="project-body">
+        <div class="project-client">Hindustan Zinc — SK Mine</div>
+        <div class="project-name">Rod Mill Liners</div>
+        <p class="project-desc">Precision 3D modelling and fabrication drawing of rod mill liner components for Sindesar Khurd underground mine.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-visual pv-4">🛡️<span class="project-num">04</span></div>
+      <div class="project-body">
+        <div class="project-client">Hindustan Zinc — RA Mine</div>
+        <div class="project-name">Machine Guarding & Refuge Chamber</div>
+        <p class="project-desc">Safety-critical designs including OSHA-compliant machine guards and a certified underground refuge chamber at Agucha Mine.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-visual pv-5">📦<span class="project-num">05</span></div>
+      <div class="project-body">
+        <div class="project-client">Hindustan Zinc — RA Mine</div>
+        <div class="project-name">800mm Conveyor Layout & Normet PC Cassette</div>
+        <p class="project-desc">Layout drawings for an 800mm underground conveyor system and complete design of the Normet PC cassette assembly.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-visual pv-6">🏭<span class="project-num">06</span></div>
+      <div class="project-body">
+        <div class="project-client">Remon Engineering</div>
+        <div class="project-name">Processing Plant Equipment Suite</div>
+        <p class="project-desc">Full 3D designs of rolling crusher, vibrating screen with elevator, magnetic elevator, and screw classifier for a mineral processing plant.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="section-label">Clients</div>
+  <h2 class="section-title">Trusted by Industry Leaders</h2>
+  <p class="section-sub">From India's largest zinc producer to specialized engineering contractors — our work spans critical industrial sectors.</p>
+
+  <div class="clients-marquee-wrapper">
+    <div class="clients-marquee">
+      <span class="client-name">Hindustan Zinc (Vedanta)</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Mine Technical Service</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Monomark Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">MM Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Remon Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Grossmecht Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Nakoda Infrasteel</span>
+      <span class="client-name">·</span>
+      <span class="client-name">3S Minerals Processor</span>
+      <span class="client-name">·</span>
+      <span class="client-name">JK Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Laxyo Energy Ltd</span>
+      <span class="client-name">·</span>
+      <!-- duplicate for seamless loop -->
+      <span class="client-name">Hindustan Zinc (Vedanta)</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Mine Technical Service</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Monomark Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">MM Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Remon Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Grossmecht Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Nakoda Infrasteel</span>
+      <span class="client-name">·</span>
+      <span class="client-name">3S Minerals Processor</span>
+      <span class="client-name">·</span>
+      <span class="client-name">JK Engineering</span>
+      <span class="client-name">·</span>
+      <span class="client-name">Laxyo Energy Ltd</span>
+    </div>
+  </div>
+
+  <div class="testimonial-block">
+    <div class="quote-icon">"</div>
+    <div>
+      <p class="quote-text">I could never imagine an emergency escape route inside hundreds of meters below in our underground mine to be so beautiful! Great innovation by our mining team at Rajpura Dariba Mine! My sincere appreciation for the team!</p>
+      <div class="quote-attr">Mr. Arun Misra — CEO, Hindustan Zinc</div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="section-label">Why Partner With Us</div>
+  <h2 class="section-title">Our Engineering Edge</h2>
+  <p class="section-sub">We bring technical depth and project-delivery discipline that US-based clients expect from a global engineering partner.</p>
+
+  <div class="cap-grid">
+    <div class="cap-item">
+      <div class="cap-number">01</div>
+      <div class="cap-content">
+        <h3>Mine-Grade Safety Design</h3>
+        <p>Deep experience designing safety-critical underground systems — escape routes, refuge chambers, blast protection — where zero tolerance for error is the standard.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-number">02</div>
+      <div class="cap-content">
+        <h3>Full 3D-to-Fabrication Pipeline</h3>
+        <p>We own the full cycle from parametric 3D models and photorealistic renders through to complete fabrication drawing packages with BOMs and data sheets.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-number">03</div>
+      <div class="cap-content">
+        <h3>Multi-Discipline Capability</h3>
+        <p>Mechanical, electrical, and civil drafting under one roof — no coordination gaps, streamlined delivery for complex, multi-system projects.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-number">04</div>
+      <div class="cap-content">
+        <h3>Proven with Tier-1 Industrial Clients</h3>
+        <p>Trusted by Vedanta/Hindustan Zinc — one of the world's largest zinc producers — across four major mine sites.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-number">05</div>
+      <div class="cap-content">
+        <h3>Cost-Effective Offshore Partnership</h3>
+        <p>World-class engineering quality at India-competitive pricing. Ideal for US firms looking to scale CAD/design capacity without scaling overheads.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-number">06</div>
+      <div class="cap-content">
+        <h3>Fast Turnaround & Communication</h3>
+        <p>Small, focused team means no bureaucracy. Direct access to the lead engineer. Regular deliverable updates and quick revision cycles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div>
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Work Together</h2>
+    <p class="section-sub">Ready to discuss your next engineering project? Reach out directly — we respond within 24 hours.</p>
+
+    <div class="contact-info">
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Office Address</div>
+          <div class="contact-value">53-ext., Near UIT, Subhash Nagar<br>Bhilwara, Rajasthan — 311001, India</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-label">Mobile / WhatsApp</div>
+          <div class="contact-value">+91 70736 63221</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">s.techengineering03@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">🏢</div>
+        <div>
+          <div class="contact-label">GST Registration</div>
+          <div class="contact-value">08OBLPS7321L1ZP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-right">
+    <div class="software-stack">
+      <div class="stack-title">Software & Tools</div>
+      <div class="stack-items">
+        <span class="stack-item">AutoCAD</span>
+        <span class="stack-item">SolidWorks</span>
+        <span class="stack-item">Inventor</span>
+        <span class="stack-item">CATIA</span>
+        <span class="stack-item">KeyShot</span>
+        <span class="stack-item">ANSYS</span>
+        <span class="stack-item">MS Office</span>
+        <span class="stack-item">DWG</span>
+        <span class="stack-item">STEP / IGES</span>
+        <span class="stack-item">PDF</span>
+        <span class="stack-item">BOM</span>
+        <span class="stack-item">3D PDF</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px; background: var(--panel); border: 1px solid var(--border); padding: 32px;">
+      <div class="stack-title" style="margin-bottom: 16px;">Industries Served</div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
+          <span style="font-size: 0.85rem; color: #bbb;">Underground Mining & Mineral Processing</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
+          <span style="font-size: 0.85rem; color: #bbb;">Heavy Industrial Machinery</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
+          <span style="font-size: 0.85rem; color: #bbb;">Hydro & Energy Infrastructure</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
+          <span style="font-size: 0.85rem; color: #bbb;">Civil Construction & Infrastructure</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
+          <span style="font-size: 0.85rem; color: #bbb;">Safety & Compliance Engineering</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="mailto:s.techengineering03@gmail.com" class="btn-primary" style="display: inline-block; margin-top: 24px;">
+      Send Us an Enquiry
+    </a>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">$ Tech Engineering</div>
+  <div class="footer-text">© 2025 S Tech Engineering · Bhilwara, India · Better Solution For All</div>
+  <div class="footer-gstin">GSTIN: 08OBLPS7321L1ZP</div>
+</footer>
+
+</body>
+</html>
