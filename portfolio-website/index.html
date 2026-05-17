@@ -1,11 +1,35 @@
 export default function STECHPortfolio() {
+  const founder = {
+    name: "Satyam Sharma",
+    role: "Founder & Lead Engineering Designer",
+    image:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1200&auto=format&fit=crop",
+  };
   const services = [
-    "Mechanical Drafting & Designing",
-    "2D Technical Drawings",
-    "3D CAD Modeling",
-    "Industrial Rendering",
-    "BOM & Data Sheet Customization",
-    "Civil & Electrical Drawings",
+    {
+      title: "Mechanical Engineering Design",
+      desc: "Industrial mechanical drafting, fabrication drawings, machine assemblies, and mining equipment engineering.",
+    },
+    {
+      title: "2D Technical Drawings",
+      desc: "Production-ready engineering drawings with dimensional accuracy and industrial documentation standards.",
+    },
+    {
+      title: "3D CAD Modeling",
+      desc: "Advanced 3D modeling for industrial systems, conveyors, mining infrastructure, and fabrication projects.",
+    },
+    {
+      title: "Industrial Rendering",
+      desc: "Realistic engineering renders and visual presentations for project approvals and execution planning.",
+    },
+    {
+      title: "BOM & Data Sheets",
+      desc: "Custom Bill of Materials, project documentation, engineering reports, and compliance-ready data sheets.",
+    },
+    {
+      title: "Electrical & Civil Drafting",
+      desc: "Integrated civil and electrical engineering drawings for industrial infrastructure projects.",
+    },
   ];
 
   const clients = [
@@ -26,44 +50,49 @@ export default function STECHPortfolio() {
     {
       title: "Emergency Escape Route – RD Mine",
       description:
-        "Designed and engineered underground emergency escape systems with installation planning and safety-first execution.",
+        "Designed emergency underground escape route systems with installation arrangements and mining safety compliance planning for Hindustan Zinc Limited.",
+      category: "Mining Safety Infrastructure",
     },
     {
       title: "Industrial Rail Trolley System",
       description:
-        "Complete trolley with rail-track engineering solution for mining transportation infrastructure.",
+        "Designed and developed complete trolley systems with integrated rail tracks for Mine Technical Service operations.",
+      category: "Industrial Transportation",
     },
     {
       title: "Rod Mill Liners – SK Mine",
       description:
-        "Precision CAD drafting and industrial manufacturing detailing for rod mill liner systems.",
+        "Precision drafting and industrial detailing for rod mill liner systems used in large-scale mining operations.",
+      category: "Mechanical Engineering",
     },
     {
       title: "Machine Guarding – Rampura Agucha Mine",
       description:
-        "Heavy-duty industrial safety guarding system designed for mining operations.",
+        "Developed industrial machine guarding systems to improve operational safety and heavy equipment protection.",
+      category: "Industrial Safety",
     },
     {
       title: "Refuge Chamber – Agucha Mine",
       description:
-        "Critical underground refuge chamber engineering with safety compliance and structural optimization.",
+        "Engineered underground refuge chamber systems designed for worker safety and emergency response infrastructure.",
+      category: "Mining Infrastructure",
     },
     {
-      title: "800mm Conveyor Layout",
+      title: "Normet PC Cassette – RA Mine",
       description:
-        "Large-scale conveyor layout engineering and optimized material handling flow design.",
+        "Designed and modeled heavy-duty Normet PC cassette engineering components for mining operational support.",
+      category: "Industrial Equipment",
+    },
+    {
+      title: "800mm Conveyor Layout – RD Mine",
+      description:
+        "Created detailed conveyor layout engineering drawings for optimized material handling and industrial workflow.",
+      category: "Material Handling Systems",
     },
     {
       title: "Blasting Face Protection Cage",
       description:
-        "Protective structural design solution engineered for underground mining blast zones.",
-    },
-    {
-      title: "Rolling Crusher & Vibrating Screen System",
-      description:
-        "Integrated industrial processing system with elevator and screw classifier engineering.",
-    },
-  ];
+        "Developed protective structural c
 
   return (
     <div className="min-h-screen bg-neutral-950 text-white font-sans">
@@ -72,7 +101,7 @@ export default function STECHPortfolio() {
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-blue-500/10" />
 
         <div className="relative max-w-7xl mx-auto px-6 py-24 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
               <div className="inline-flex items-center gap-2 border border-orange-500/30 bg-orange-500/10 px-4 py-2 rounded-full text-sm text-orange-300 mb-8">
                 Enterprise Engineering & Industrial Design Solutions
@@ -115,29 +144,59 @@ export default function STECHPortfolio() {
               </div>
             </div>
 
-            <div className="relative">
-              <div className="bg-neutral-900 border border-neutral-800 rounded-[2rem] p-8 shadow-2xl">
-                <div className="flex items-center justify-between mb-8">
-                  <h3 className="text-2xl font-bold">Core Capabilities</h3>
-                  <div className="w-4 h-4 rounded-full bg-green-400 animate-pulse" />
-                </div>
+            <div className="relative flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-xl">
+                <div className="absolute -top-10 -left-10 w-48 h-48 bg-orange-500/20 blur-3xl rounded-full" />
+                <div className="absolute bottom-0 right-0 w-56 h-56 bg-blue-500/10 blur-3xl rounded-full" />
 
-                <div className="space-y-5">
-                  {services.map((service, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between bg-neutral-950 border border-neutral-800 rounded-2xl p-5 hover:border-orange-500/40 transition-all duration-300"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold">
-                          {index + 1}
-                        </div>
-                        <span className="font-medium">{service}</span>
-                      </div>
+                <div className="relative bg-neutral-900/80 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 shadow-[0_20px_80px_rgba(0,0,0,0.45)] overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.15),transparent_30%)]" />
 
-                      <span className="text-green-400 text-sm">Active</span>
+                  <div className="relative flex flex-col items-center text-center">
+                    <div className="relative">
+                      <div className="absolute inset-0 rounded-full bg-orange-500 blur-2xl opacity-30 scale-110" />
+
+                      <img
+                        src={founder.image}
+                        alt={founder.name}
+                        className="relative w-56 h-56 object-cover rounded-full border-4 border-orange-500 shadow-2xl shadow-orange-500/30"
+                      />
                     </div>
-                  ))}
+
+                    <h3 className="mt-8 text-3xl font-black tracking-tight">
+                      {founder.name}
+                    </h3>
+
+                    <p className="mt-2 text-orange-300 font-medium text-lg">
+                      {founder.role}
+                    </p>
+
+                    <p className="mt-6 text-neutral-400 leading-relaxed max-w-md">
+                      Delivering precision engineering, industrial drafting,
+                      mining infrastructure systems, and enterprise-grade CAD
+                      execution for industrial clients and large-scale operations.
+                    </p>
+                  </div>
+
+                  <div className="relative mt-10 grid grid-cols-2 gap-5">
+                    <div className="bg-black/40 border border-white/10 rounded-3xl p-6 text-center">
+                      <h4 className="text-4xl font-black text-orange-400">10+</h4>
+                      <p className="mt-2 text-neutral-400 text-sm">
+                        Enterprise Clients
+                      </p>
+                    </div>
+
+                    <div className="bg-black/40 border border-white/10 rounded-3xl p-6 text-center">
+                      <h4 className="text-4xl font-black text-orange-400">50+</h4>
+                      <p className="mt-2 text-neutral-400 text-sm">
+                        Industrial Projects
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="relative mt-8 bg-gradient-to-r from-orange-500 to-orange-300 text-black rounded-3xl p-6 font-bold text-center shadow-2xl shadow-orange-500/20">
+                    Trusted Engineering Partner for Industrial & Mining Solutions
+                  </div>
                 </div>
               </div>
             </div>
@@ -146,7 +205,7 @@ export default function STECHPortfolio() {
       </section>
 
       {/* About Section */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-28">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <p className="text-orange-400 uppercase tracking-[0.3em] text-sm font-semibold">
@@ -225,13 +284,15 @@ export default function STECHPortfolio() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-10">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="group bg-neutral-950 border border-neutral-800 hover:border-orange-500/50 rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-1"
+                className="group relative overflow-hidden bg-gradient-to-br from-neutral-950 to-neutral-900 border border-neutral-800 hover:border-orange-500/50 rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(255,165,0,0.08)]"
               >
-                <div className="flex items-center justify-between">
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.12),transparent_40%)]" />
+
+                <div className="relative flex items-center justify-between">
                   <span className="text-orange-400 font-bold text-lg">
                     0{index + 1}
                   </span>
@@ -266,11 +327,11 @@ export default function STECHPortfolio() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {clients.map((client, index) => (
             <div
               key={index}
-              className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 hover:border-orange-500/40 transition-all duration-300"
+              className="group bg-gradient-to-br from-neutral-900 to-black border border-neutral-800 rounded-3xl p-7 hover:border-orange-500/40 hover:-translate-y-1 transition-all duration-300 shadow-xl"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-400 font-black">
