@@ -1,1115 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>$ Tech Engineering — Design & Engineering Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --black: #0a0a0a;
-    --off-black: #111111;
-    --panel: #161616;
-    --border: #2a2a2a;
-    --gold: #c8a84b;
-    --gold-light: #e4c97a;
-    --gold-dim: #8a7030;
-    --white: #f0ede6;
-    --muted: #888;
-    --teal: #2bbfa4;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 48px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(10,10,10,0.85);
-    backdrop-filter: blur(12px);
-  }
-
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-  }
-
-  .nav-links {
-    display: flex; gap: 36px; list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--gold); }
-
-  .nav-cta {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--gold);
-    padding: 10px 22px;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-
-  .nav-cta:hover { background: var(--gold-light); }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-grid-bg {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(200,168,75,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,168,75,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-
-  .hero-left {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 80px 48px 80px 64px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 24px;
-    display: flex; align-items: center; gap: 12px;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    display: block; width: 40px; height: 1px;
-    background: var(--gold);
-  }
-
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 7vw, 7.5rem);
-    line-height: 0.92;
-    letter-spacing: 0.02em;
-    color: var(--white);
-    margin-bottom: 32px;
-  }
-
-  .hero-title span { color: var(--gold); }
-
-  .hero-desc {
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: #aaa;
-    max-width: 440px;
-    margin-bottom: 48px;
-  }
-
-  .hero-actions {
-    display: flex; gap: 16px; align-items: center;
-  }
-
-  .btn-primary {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--gold);
-    padding: 16px 32px;
-    text-decoration: none;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-primary::after {
-    content: '→';
-    margin-left: 10px;
-  }
-
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-
-  .btn-secondary {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    padding: 16px 32px;
-    text-decoration: none;
-    border: 1px solid var(--gold-dim);
-    transition: all 0.2s;
-  }
-
-  .btn-secondary:hover { border-color: var(--gold); background: rgba(200,168,75,0.05); }
-
-  .hero-right {
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-  }
-
-  .hero-right::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(43,191,164,0.06) 0%, rgba(200,168,75,0.08) 100%);
-  }
-
-  .hero-badge-cluster {
-    position: relative; z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    padding: 48px;
-  }
-
-  .stat-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 28px 24px;
-    position: relative;
-    overflow: hidden;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .stat-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--gold), transparent);
-  }
-
-  .stat-card:nth-child(1) { animation-delay: 0.1s; }
-  .stat-card:nth-child(2) { animation-delay: 0.2s; }
-  .stat-card:nth-child(3) { animation-delay: 0.3s; }
-  .stat-card:nth-child(4) { animation-delay: 0.4s; }
-
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3.2rem;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .hero-scroll {
-    position: absolute; bottom: 32px; left: 64px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: flex; align-items: center; gap: 12px;
-    z-index: 2;
-  }
-
-  .hero-scroll::after {
-    content: '';
-    display: block; width: 1px; height: 40px;
-    background: var(--border);
-    animation: scrollPulse 2s ease infinite;
-  }
-
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
-  }
-
-  /* ── SECTION BASE ── */
-  section {
-    padding: 120px 64px;
-    position: relative;
-  }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-    display: flex; align-items: center; gap: 12px;
-  }
-
-  .section-label::before {
-    content: '';
-    display: inline-block; width: 28px; height: 1px;
-    background: var(--gold);
-  }
-
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    letter-spacing: 0.03em;
-    color: var(--white);
-    margin-bottom: 16px;
-  }
-
-  .section-sub {
-    font-size: 1rem;
-    color: var(--muted);
-    max-width: 560px;
-    line-height: 1.7;
-    margin-bottom: 64px;
-  }
-
-  /* ── SERVICES ── */
-  #services { background: var(--off-black); }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-
-  .service-card {
-    background: var(--off-black);
-    padding: 40px 32px;
-    transition: background 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .service-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 0;
-    background: linear-gradient(to top, rgba(200,168,75,0.05), transparent);
-    transition: height 0.3s;
-  }
-
-  .service-card:hover { background: #1a1a1a; }
-  .service-card:hover::after { height: 100%; }
-
-  .service-icon {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    display: block;
-  }
-
-  .service-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 0.05em;
-    color: var(--white);
-    margin-bottom: 12px;
-  }
-
-  .service-desc {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  .service-tags {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    margin-top: 20px;
-  }
-
-  .tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold-dim);
-    background: rgba(200,168,75,0.07);
-    border: 1px solid rgba(200,168,75,0.15);
-    padding: 4px 10px;
-  }
-
-  /* ── PROJECTS ── */
-  #projects { background: var(--black); }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .project-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    overflow: hidden;
-    position: relative;
-    transition: transform 0.3s, border-color 0.3s;
-    animation: fadeUp 0.5s ease both;
-  }
-
-  .project-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--gold-dim);
-  }
-
-  .project-card:nth-child(1) { animation-delay: 0.05s; }
-  .project-card:nth-child(2) { animation-delay: 0.1s; }
-  .project-card:nth-child(3) { animation-delay: 0.15s; }
-  .project-card:nth-child(4) { animation-delay: 0.2s; }
-  .project-card:nth-child(5) { animation-delay: 0.25s; }
-  .project-card:nth-child(6) { animation-delay: 0.3s; }
-
-  .project-visual {
-    height: 160px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .pv-1 { background: linear-gradient(135deg, #0f1f1a 0%, #0a2a24 100%); }
-  .pv-2 { background: linear-gradient(135deg, #1a1a0a 0%, #2a2400 100%); }
-  .pv-3 { background: linear-gradient(135deg, #0a0f1f 0%, #0a1a3a 100%); }
-  .pv-4 { background: linear-gradient(135deg, #1a0f0a 0%, #2a1800 100%); }
-  .pv-5 { background: linear-gradient(135deg, #0f1a0a 0%, #182800 100%); }
-  .pv-6 { background: linear-gradient(135deg, #1a0a1a 0%, #2a0028 100%); }
-
-  .project-visual::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      45deg, transparent, transparent 20px,
-      rgba(200,168,75,0.02) 20px, rgba(200,168,75,0.02) 21px
-    );
-  }
-
-  .project-num {
-    position: absolute; top: 12px; right: 14px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    color: var(--gold-dim);
-  }
-
-  .project-body { padding: 24px; }
-
-  .project-client {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 8px;
-  }
-
-  .project-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.25rem;
-    letter-spacing: 0.04em;
-    color: var(--white);
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-
-  .project-desc {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.55;
-  }
-
-  /* ── CLIENTS ── */
-  #clients { background: var(--off-black); }
-
-  .clients-marquee-wrapper {
-    overflow: hidden;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 28px 0;
-    margin-bottom: 64px;
-  }
-
-  .clients-marquee {
-    display: flex; gap: 64px;
-    animation: marquee 22s linear infinite;
-    white-space: nowrap;
-  }
-
-  .client-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.1rem;
-    letter-spacing: 0.12em;
-    color: var(--border);
-    transition: color 0.3s;
-    flex-shrink: 0;
-  }
-
-  .client-name:hover { color: var(--gold-dim); }
-
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  .testimonial-block {
-    display: grid;
-    grid-template-columns: 64px 1fr;
-    gap: 32px;
-    max-width: 800px;
-    padding: 40px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--gold);
-    position: relative;
-  }
-
-  .quote-icon {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 6rem;
-    color: var(--gold);
-    opacity: 0.2;
-    line-height: 1;
-    margin-top: -12px;
-  }
-
-  .quote-text {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: #ccc;
-    font-style: italic;
-    margin-bottom: 20px;
-  }
-
-  .quote-attr {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  /* ── CAPABILITIES ── */
-  #capabilities { background: var(--black); }
-
-  .cap-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    margin-bottom: 64px;
-  }
-
-  .cap-item {
-    background: var(--black);
-    padding: 32px;
-    display: flex; align-items: flex-start; gap: 20px;
-    transition: background 0.2s;
-  }
-
-  .cap-item:hover { background: #0e0e0e; }
-
-  .cap-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--border);
-    line-height: 1;
-    flex-shrink: 0;
-    width: 48px;
-  }
-
-  .cap-content h3 {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-
-  .cap-content p {
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.55;
-  }
-
-  /* ── CONTACT ── */
-  #contact {
-    background: var(--off-black);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .contact-info { }
-
-  .contact-detail {
-    display: flex; gap: 20px;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .contact-detail:first-of-type { border-top: 1px solid var(--border); }
-
-  .contact-icon {
-    font-size: 1.2rem;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .contact-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 4px;
-  }
-
-  .contact-value {
-    font-size: 0.9rem;
-    color: var(--white);
-    line-height: 1.4;
-  }
-
-  .contact-right {
-    padding-top: 8px;
-  }
-
-  .software-stack {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 32px;
-  }
-
-  .stack-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 24px;
-  }
-
-  .stack-items {
-    display: flex; flex-wrap: wrap; gap: 10px;
-  }
-
-  .stack-item {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--white);
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    padding: 8px 14px;
-    transition: all 0.2s;
-  }
-
-  .stack-item:hover {
-    border-color: var(--gold-dim);
-    color: var(--gold);
-    background: rgba(200,168,75,0.06);
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--black);
-    border-top: 1px solid var(--border);
-    padding: 32px 64px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-  }
-
-  .footer-text {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-  }
-
-  .footer-gstin {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    color: #3a3a3a;
-  }
-
-  /* ── DIVIDER ── */
-  .gold-divider {
-    width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-left { animation: fadeUp 0.8s ease both; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 80px 24px 60px; }
-    section { padding: 80px 24px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .cap-grid { grid-template-columns: 1fr; }
-    #contact { grid-template-columns: 1fr; gap: 40px; padding: 80px 24px; }
-    footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S Tech Engineering | Corporate Design Portfolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0f141c;
+      color: #d6d9dc;
+    }
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
+    /* VCard Custom Glassmorphism styling overrides */
+    .vcard-sidebar {
+      background: #1e242f;
+      border: 1px solid #2b3344;
+    }
+    .vcard-main-content {
+      background: #1e242f;
+      border: 1px solid #2b3344;
+    }
+    .contact-item-box {
+      background: #171b23;
+      border: 1px solid #232a36;
+    }
+    .nav-btn {
+      color: #9ca3af;
+      transition: all 0.2s ease-in-out;
+    }
+    .nav-btn:hover {
+      color: #f3f4f6;
+    }
+    .nav-btn.active {
+      color: #ffdb6e;
+    }
+    .accent-bar {
+      background: linear-gradient(90deg, #ffdb6e 0%, #ffb938 100%);
+    }
+    .timeline-dot::after {
+      content: '';
+      position: absolute;
+      left: -21px;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      background: #ffdb6e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #2b3344;
+    }
+  </style>
 </head>
-<body>
+<body class="min-h-screen py-8 px-4 sm:px-6 lg:px-8 flex justify-center items-center font-inter">
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">$ Tech Engineering</div>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#clients">Clients</a></li>
-    <li><a href="#capabilities">Capabilities</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="mailto:s.techengineering03@gmail.com" class="nav-cta">Get a Quote</a>
-</nav>
+  <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-start my-4 lg:my-12">
+    
+    <aside class="lg:col-span-3 vcard-sidebar rounded-3xl p-6 flex flex-col items-center relative shadow-xl text-center lg:text-left">
+      
+      <div class="w-24 h-24 rounded-2xl bg-[#171b23] flex items-center justify-center border border-[#2b3344] shadow-inner mt-4">
+        <i class="fa-solid fa-gears text-4xl text-[#ffdb6e]"></i>
+      </div>
+      
+      <div class="flex flex-col items-center lg:items-start w-full mt-5">
+        <h1 class="text-xl font-bold text-white tracking-wide font-sans">S Tech Engineering</h1>
+        <p class="text-xs px-3 py-1 bg-[#171b23] text-[#ffdb6e] rounded-lg font-medium mt-2 tracking-wide uppercase border border-[#ffdb6e]/20">
+          Design Service Provider
+        </p>
+        <span class="text-[11px] text-amber-500 font-medium italic mt-1.5">"Better Solution For All"</span>
+      </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid-bg"></div>
+      <hr class="w-full border-[#2b3344] my-6">
 
-  <div class="hero-left">
-    <div class="hero-eyebrow">Bhilwara, Rajasthan · Est. India</div>
-    <h1 class="hero-title">
-      Precision<br>
-      <span>Engineering</span><br>
-      Design
-    </h1>
-    <p class="hero-desc">
-      End-to-end mechanical, electrical & civil drafting for mining, heavy industry, and infrastructure — from concept to fabrication-ready drawings.
-    </p>
-    <div class="hero-actions">
-      <a href="#projects" class="btn-primary">View Projects</a>
-      <a href="#contact" class="btn-secondary">Contact Us</a>
-    </div>
+      <div class="w-full space-y-4 text-left text-sm">
+        
+        <div class="flex items-center gap-3 contact-item-box p-3 rounded-xl">
+          <div class="w-9 h-9 rounded-lg bg-[#1a1f29] flex items-center justify-center text-[#ffdb6e] border border-[#2b3344] flex-shrink-0">
+            <i class="fa-solid fa-envelope text-xs"></i>
+          </div>
+          <div class="overflow-hidden">
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Email</p>
+            <a href="mailto:s.techengineering03@gmail.com" class="text-gray-200 font-medium hover:text-[#ffdb6e] text-xs break-all block">s.techengineering03@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 contact-item-box p-3 rounded-xl">
+          <div class="w-9 h-9 rounded-lg bg-[#1a1f29] flex items-center justify-center text-[#ffdb6e] border border-[#2b3344] flex-shrink-0">
+            <i class="fa-solid fa-phone text-xs"></i>
+          </div>
+          <div>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Phone</p>
+            <p class="text-gray-200 text-xs font-medium tracking-wide">+91 7073663221</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 contact-item-box p-3 rounded-xl">
+          <div class="w-9 h-9 rounded-lg bg-[#1a1f29] flex items-center justify-center text-[#ffdb6e] border border-[#2b3344] flex-shrink-0">
+            <i class="fa-solid fa-location-dot text-xs"></i>
+          </div>
+          <div>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider">Location</p>
+            <p class="text-gray-200 text-xs leading-relaxed">Bhilwara, Rajasthan, India</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 contact-item-box p-3 rounded-xl">
+          <div class="w-9 h-9 rounded-lg bg-[#1a1f29] flex items-center justify-center text-[#ffdb6e] border border-[#2b3344] flex-shrink-0">
+            <i class="fa-solid fa-id-card text-xs"></i>
+          </div>
+          <div>
+            <p class="text-[10px] text-gray-400 uppercase tracking-wider">GSTIN</p>
+            <p class="text-gray-200 font-mono text-xs tracking-tight">080BLPS7321L1ZP</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="w-full text-center lg:text-left mt-5 px-1">
+        <p class="text-[11px] text-gray-500 leading-normal">
+          53-ext., Near UIT., Subhash Nagar, Bhilwara (Raj.) Pin - 311001
+        </p>
+      </div>
+
+    </aside>
+
+    <main class="lg:col-span-9 flex flex-col relative w-full">
+      
+      <nav class="absolute top-0 right-0 z-20 bg-[#2b3344]/80 backdrop-blur-md rounded-bl-3xl rounded-tr-3xl border-l border-b border-[#384258] flex px-6 py-3 gap-6 shadow-md max-sm:w-full max-sm:justify-center max-sm:rounded-t-3xl max-sm:rounded-b-none max-sm:position-static">
+        <button onclick="changeView('about')" id="nav-about" class="nav-btn active text-sm font-semibold tracking-wide cursor-pointer font-sans">About</button>
+        <button onclick="changeView('resume')" id="nav-resume" class="nav-btn text-sm font-semibold tracking-wide cursor-pointer font-sans">Resume</button>
+        <button onclick="changeView('clients')" id="nav-clients" class="nav-btn text-sm font-semibold tracking-wide cursor-pointer font-sans">Clients</button>
+      </nav>
+
+      <section class="vcard-main-content rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl min-h-[620px] pt-16 sm:pt-20 lg:pt-14">
+        
+        <div id="view-about" class="view-panel transition-opacity duration-300 space-y-8">
+          <div>
+            <h2 class="text-2xl font-bold text-white tracking-wide font-sans relative pb-3">
+              About Us
+              <span class="absolute bottom-0 left-0 w-10 h-1 accent-bar rounded-full"></span>
+            </h2>
+            <p class="text-sm text-gray-400 leading-relaxed mt-5">
+              S Tech Engineering functions as a multi-disciplinary <b>Design Service Provider</b> and trusted <b>Material Supply Partner</b>. We execute accurate blueprint structures, 3D CAD modeling environments, and comprehensive engineering asset data generation across complex mechanical, electrical, and civil projects.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-white tracking-wide font-sans mb-4">What We Do</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <div class="contact-item-box p-4 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-[#ffdb6e] mt-1"><i class="fa-solid fa-compass-drafting"></i></div>
+                <div>
+                  <h4 class="text-white font-bold text-sm tracking-wide">Drafting & Designing</h4>
+                  <p class="text-xs text-gray-400 mt-1 leading-relaxed">Development of production-ready 2D Drawing Sheets and complex high-integrity 3D Models.</p>
+                </div>
+              </div>
+
+              <div class="contact-item-box p-4 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-[#ffdb6e] mt-1"><i class="fa-solid fa-cubes"></i></div>
+                <div>
+                  <h4 class="text-white font-bold text-sm tracking-wide">Realistic Rendering</h4>
+                  <p class="text-xs text-gray-400 mt-1 leading-relaxed">Generating precise digital structural views and realistic machinery environment assemblies.</p>
+                </div>
+              </div>
+
+              <div class="contact-item-box p-4 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-[#ffdb6e] mt-1"><i class="fa-solid fa-file-shield"></i></div>
+                <div>
+                  <h4 class="text-white font-bold text-sm tracking-wide">Technical Documentation</h4>
+                  <p class="text-xs text-gray-400 mt-1 leading-relaxed">Providing high-accuracy Custom Reports, Technical Asset Data Sheets, and Bills of Materials (BOM).</p>
+                </div>
+              </div>
+
+              <div class="contact-item-box p-4 rounded-2xl flex items-start gap-4">
+                <div class="text-2xl text-[#ffdb6e] mt-1"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                <div>
+                  <h4 class="text-white font-bold text-sm tracking-wide">Material Supply</h4>
+                  <p class="text-xs text-gray-400 mt-1 leading-relaxed">Strategic procurement tracking alongside physical item logistics for custom site installations.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-white tracking-wide font-sans mb-3">Our Core Specializations</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs font-semibold px-4 py-2 bg-[#171b23] border border-[#232a36] text-gray-300 rounded-xl"><i class="fa-solid fa-gear text-[#ffdb6e] mr-1.5"></i> Mechanical Drawing</span>
+              <span class="text-xs font-semibold px-4 py-2 bg-[#171b23] border border-[#232a36] text-gray-300 rounded-xl"><i class="fa-solid fa-bolt text-[#ffdb6e] mr-1.5"></i> Electrical Drawing</span>
+              <span class="text-xs font-semibold px-4 py-2 bg-[#171b23] border border-[#232a36] text-gray-300 rounded-xl"><i class="fa-solid fa-trowel-bricks text-[#ffdb6e] mr-1.5"></i> Civil Drawing</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="view-resume" class="view-panel hidden transition-opacity duration-300 space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-white tracking-wide font-sans relative pb-3">
+              Major Accomplishments
+              <span class="absolute bottom-0 left-0 w-10 h-1 accent-bar rounded-full"></span>
+            </h2>
+          </div>
+
+          <div class="bg-gradient-to-r from-[#171b23] to-[#1e242f] border border-[#ffdb6e]/20 rounded-2xl p-5 relative overflow-hidden my-4 shadow-md">
+            <div class="absolute right-4 bottom-[-10px] text-gray-700/10 text-8xl font-serif font-black select-none">“</div>
+            <p class="text-[10px] text-[#ffdb6e] uppercase tracking-widest font-bold mb-2 flex items-center gap-1">
+              <i class="fa-solid fa-circle-check"></i> Executive Recognition
+            </p>
+            <p class="text-gray-300 italic text-xs sm:text-sm leading-relaxed mb-3">
+              "I could never imagine an emergency escape route inside hundreds of meters below in our underground mine to be so beautiful! Great innovation by our mining team at Rajpura Dariba Mine! My sincere appreciation for the team!"
+            </p>
+            <p class="text-xs font-bold text-white">- Mr. Arun Misra, <span class="text-gray-400 font-normal">CEO, Hindustan Zinc (Vedanta)</span></p>
+          </div>
+
+          <div class="relative border-l-2 border-[#2b3344] ml-4 pl-6 space-y-6 mt-6">
+            
+            <div class="relative">
+              <h3 class="timeline-dot text-sm font-bold text-white font-sans uppercase tracking-wide">Emergency Escape Route & Installation Arrangement</h3>
+              <span class="text-[11px] text-[#ffdb6e] font-semibold">RD Mine • Hindustan Zinc Limited</span>
+              <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">Full conceptual drafting, realistic environment rendering, and execution mapping praised at the executive level for outstanding underground safety design innovation.</p>
+            </div>
+
+            <div class="relative">
+              <h3 class="timeline-dot text-sm font-bold text-white font-sans uppercase tracking-wide">Trolley with Whole Rails Track System</h3>
+              <span class="text-[11px] text-[#ffdb6e] font-semibold">Mine Technical Services</span>
+              <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">Engineered robust custom-fitted rail track frameworks and transport trolley infrastructure configurations for subterranean logistics operations.</p>
+            </div>
+
+            <div class="relative">
+              <h3 class="timeline-dot text-sm font-bold text-white font-sans uppercase tracking-wide">Heavy Machinery Parts Integration</h3>
+              <span class="text-[11px] text-[#ffdb6e] font-semibold">SK Mine & Rampura Agucha Mine</span>
+              <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">Modeled high-durability Rod Mill Liners at SK Mine and high-hazard Machine Guarding Systems at Rampura Agucha Mine to meet critical corporate security specifications.</p>
+            </div>
+
+            <div class="relative">
+              <h3 class="timeline-dot text-sm font-bold text-white font-sans uppercase tracking-wide">Safety & Logistics Site Frameworks</h3>
+              <span class="text-[11px] text-[#ffdb6e] font-semibold">Agucha, RD & RA Mine Sites</span>
+              <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">Delivered complete blueprints for a Blasting Face Protection Cage, 800 mm Conveyor Layout Drawing, deep-shaft Refuge Chambers, and operational Normet PC Cassette systems.</p>
+            </div>
+
+            <div class="relative">
+              <h3 class="timeline-dot text-sm font-bold text-white font-sans uppercase tracking-wide">Material Processing Infrastructure Plants</h3>
+              <span class="text-[11px] text-[#ffdb6e] font-semibold">Remon Engineering Portfolio</span>
+              <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">Designed structural equipment components including custom Rolling Crushers, Screw Classifiers, Vibrating Screens with integrated elevators, and Magnetic Elevators.</p>
+            </div>
+
+            <div class="relative">
+              <h3 class="timeline-dot text-sm font-bold text-white font-sans uppercase tracking-wide">SK Mine Cage and Skip Partition Wall</h3>
+              <span class="text-[11px] text-[#ffdb6e] font-semibold">Underground Shaft Systems</span>
+              <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">Formulated precision modeling schematics for structural vertical shaft divider frameworks.</p>
+            </div>
+
+            <div class="relative">
+              <h3 class="timeline-dot text-sm font-bold text-white font-sans uppercase tracking-wide">Ferrule Trolley Infrastructure System</h3>
+              <span class="text-[11px] text-[#ffdb6e] font-semibold">Hydro Project Domain</span>
+              <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">Engineered specialty structural alignment delivery and deployment positioning trolley assemblies for pipelines.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div id="view-clients" class="view-panel hidden transition-opacity duration-300 space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-white tracking-wide font-sans relative pb-3">
+              Trusted Enterprise Clients
+              <span class="absolute bottom-0 left-0 w-10 h-1 accent-bar rounded-full"></span>
+            </h2>
+            <p class="text-sm text-gray-400 leading-relaxed mt-5">
+              Our high-accuracy drawings, bills of materials (BOM), and material supply logistics are relied upon by enterprise groups and heavy infrastructure operators:
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            
+            <div class="contact-item-box p-4 rounded-2xl">
+              <h4 class="text-white font-bold text-sm tracking-wide flex items-center gap-2">
+                <i class="fa-solid fa-building text-[#ffdb6e]"></i> Hindustan Zinc Limited (Vedanta)
+              </h4>
+              <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                Active core blueprints deployed across: RA Mine, SK Mine, RD Mine, Zawar Mine, and Mine Technical Services.
+              </p>
+            </div>
+
+            <div class="contact-item-box p-4 rounded-2xl flex items-center">
+              <p class="text-sm font-semibold text-gray-200"><i class="fa-solid fa-arrow-right-long text-[#ffdb6e] mr-2"></i> Monomark Engineering Pvt. Ltd (MM Engineering)</p>
+            </div>
+
+            <div class="contact-item-box p-4 rounded-2xl flex items-center">
+              <p class="text-sm font-semibold text-gray-200"><i class="fa-solid fa-arrow-right-long text-[#ffdb6e] mr-2"></i> Remon Engineering</p>
+            </div>
+
+            <div class="contact-item-box p-4 rounded-2xl flex items-center">
+              <p class="text-sm font-semibold text-gray-200"><i class="fa-solid fa-arrow-right-long text-[#ffdb6e] mr-2"></i> Grossmecht Eng. (P) Ltd</p>
+            </div>
+
+            <div class="contact-item-box p-4 rounded-2xl flex items-center">
+              <p class="text-sm font-semibold text-gray-200"><i class="fa-solid fa-arrow-right-long text-[#ffdb6e] mr-2"></i> Nakoda Infrasteel Pvt. Ltd</p>
+            </div>
+
+            <div class="contact-item-box p-4 rounded-2xl flex items-center">
+              <p class="text-sm font-semibold text-gray-200"><i class="fa-solid fa-arrow-right-long text-[#ffdb6e] mr-2"></i> 3S Minerals Processor Pvt Ltd</p>
+            </div>
+
+            <div class="contact-item-box p-4 rounded-2xl flex items-center">
+              <p class="text-sm font-semibold text-gray-200"><i class="fa-solid fa-arrow-right-long text-[#ffdb6e] mr-2"></i> Laxyo Energy Ltd</p>
+            </div>
+
+            <div class="contact-item-box p-4 rounded-2xl flex items-center">
+              <p class="text-sm font-semibold text-gray-200"><i class="fa-solid fa-arrow-right-long text-[#ffdb6e] mr-2"></i> Balaji Construction | JK Engineering</p>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+    </main>
+
   </div>
 
-  <div class="hero-right">
-    <div class="hero-badge-cluster">
-      <div class="stat-card">
-        <div class="stat-num">11+</div>
-        <div class="stat-label">Major Projects</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">10+</div>
-        <div class="stat-label">Clients Served</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">3D</div>
-        <div class="stat-label">Modeling & Render</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">CAD</div>
-        <div class="stat-label">Multi-Discipline</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-scroll">Scroll</div>
-</section>
-
-<div class="gold-divider"></div>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="section-label">What We Do</div>
-  <h2 class="section-title">Full-Spectrum Design Services</h2>
-  <p class="section-sub">From concept sketches to BOM-ready documentation — we deliver across mechanical, electrical, and civil disciplines.</p>
-
-  <div class="services-grid">
-    <div class="service-card">
-      <span class="service-icon">✏️</span>
-      <div class="service-name">2D Drafting</div>
-      <p class="service-desc">Precise, standards-compliant 2D drawing sheets for manufacturing, installation, and documentation purposes.</p>
-      <div class="service-tags">
-        <span class="tag">AutoCAD</span>
-        <span class="tag">DWG / PDF</span>
-        <span class="tag">GD&T</span>
-      </div>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">🧱</span>
-      <div class="service-name">3D Modeling</div>
-      <p class="service-desc">Detailed parametric 3D models with full assembly, motion studies, and photorealistic rendering for client presentations.</p>
-      <div class="service-tags">
-        <span class="tag">SolidWorks</span>
-        <span class="tag">Rendering</span>
-        <span class="tag">Assembly</span>
-      </div>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">📋</span>
-      <div class="service-name">Technical Documentation</div>
-      <p class="service-desc">Customised reports, data sheets, and Bills of Materials structured for procurement and project management teams.</p>
-      <div class="service-tags">
-        <span class="tag">BOM</span>
-        <span class="tag">Data Sheets</span>
-        <span class="tag">Reports</span>
-      </div>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">⚙️</span>
-      <div class="service-name">Mechanical Engineering</div>
-      <p class="service-desc">Structural components, machinery layouts, conveyor systems, mine safety equipment, and industrial fabrication drawings.</p>
-      <div class="service-tags">
-        <span class="tag">Structural</span>
-        <span class="tag">Mining</span>
-        <span class="tag">Fabrication</span>
-      </div>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">⚡</span>
-      <div class="service-name">Electrical Drawing</div>
-      <p class="service-desc">Single-line diagrams, panel layouts, cable schedules, and instrumentation & control drawings for industrial facilities.</p>
-      <div class="service-tags">
-        <span class="tag">SLD</span>
-        <span class="tag">Panel Design</span>
-        <span class="tag">I&C</span>
-      </div>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">🏗️</span>
-      <div class="service-name">Civil Drawing</div>
-      <p class="service-desc">Civil layout plans, structural drawings, foundation details, and site plans for construction and infrastructure projects.</p>
-      <div class="service-tags">
-        <span class="tag">Layout Plans</span>
-        <span class="tag">Structural</span>
-        <span class="tag">Infrastructure</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">Portfolio</div>
-  <h2 class="section-title">Major Projects Delivered</h2>
-  <p class="section-sub">Engineering challenges solved for India's leading mining and industrial clients, with designs that have received recognition from C-suite leadership.</p>
-
-  <div class="projects-grid">
-    <div class="project-card">
-      <div class="project-visual pv-1">🚨<span class="project-num">01</span></div>
-      <div class="project-body">
-        <div class="project-client">Hindustan Zinc — RD Mine</div>
-        <div class="project-name">Emergency Escape Route System</div>
-        <p class="project-desc">Full design of underground emergency escape route and installation arrangement, personally appreciated by the CEO of Hindustan Zinc, Mr. Arun Misra.</p>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-visual pv-2">🚃<span class="project-num">02</span></div>
-      <div class="project-body">
-        <div class="project-client">Mine Technical Service</div>
-        <div class="project-name">Trolley & Whole Rails Track</div>
-        <p class="project-desc">Complete design of heavy-duty underground trolley system and rail track layout for mine material transport operations.</p>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-visual pv-3">🔩<span class="project-num">03</span></div>
-      <div class="project-body">
-        <div class="project-client">Hindustan Zinc — SK Mine</div>
-        <div class="project-name">Rod Mill Liners</div>
-        <p class="project-desc">Precision 3D modelling and fabrication drawing of rod mill liner components for Sindesar Khurd underground mine.</p>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-visual pv-4">🛡️<span class="project-num">04</span></div>
-      <div class="project-body">
-        <div class="project-client">Hindustan Zinc — RA Mine</div>
-        <div class="project-name">Machine Guarding & Refuge Chamber</div>
-        <p class="project-desc">Safety-critical designs including OSHA-compliant machine guards and a certified underground refuge chamber at Agucha Mine.</p>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-visual pv-5">📦<span class="project-num">05</span></div>
-      <div class="project-body">
-        <div class="project-client">Hindustan Zinc — RA Mine</div>
-        <div class="project-name">800mm Conveyor Layout & Normet PC Cassette</div>
-        <p class="project-desc">Layout drawings for an 800mm underground conveyor system and complete design of the Normet PC cassette assembly.</p>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-visual pv-6">🏭<span class="project-num">06</span></div>
-      <div class="project-body">
-        <div class="project-client">Remon Engineering</div>
-        <div class="project-name">Processing Plant Equipment Suite</div>
-        <p class="project-desc">Full 3D designs of rolling crusher, vibrating screen with elevator, magnetic elevator, and screw classifier for a mineral processing plant.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CLIENTS -->
-<section id="clients">
-  <div class="section-label">Clients</div>
-  <h2 class="section-title">Trusted by Industry Leaders</h2>
-  <p class="section-sub">From India's largest zinc producer to specialized engineering contractors — our work spans critical industrial sectors.</p>
-
-  <div class="clients-marquee-wrapper">
-    <div class="clients-marquee">
-      <span class="client-name">Hindustan Zinc (Vedanta)</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Mine Technical Service</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Monomark Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">MM Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Remon Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Grossmecht Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Nakoda Infrasteel</span>
-      <span class="client-name">·</span>
-      <span class="client-name">3S Minerals Processor</span>
-      <span class="client-name">·</span>
-      <span class="client-name">JK Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Laxyo Energy Ltd</span>
-      <span class="client-name">·</span>
-      <!-- duplicate for seamless loop -->
-      <span class="client-name">Hindustan Zinc (Vedanta)</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Mine Technical Service</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Monomark Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">MM Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Remon Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Grossmecht Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Nakoda Infrasteel</span>
-      <span class="client-name">·</span>
-      <span class="client-name">3S Minerals Processor</span>
-      <span class="client-name">·</span>
-      <span class="client-name">JK Engineering</span>
-      <span class="client-name">·</span>
-      <span class="client-name">Laxyo Energy Ltd</span>
-    </div>
-  </div>
-
-  <div class="testimonial-block">
-    <div class="quote-icon">"</div>
-    <div>
-      <p class="quote-text">I could never imagine an emergency escape route inside hundreds of meters below in our underground mine to be so beautiful! Great innovation by our mining team at Rajpura Dariba Mine! My sincere appreciation for the team!</p>
-      <div class="quote-attr">Mr. Arun Misra — CEO, Hindustan Zinc</div>
-    </div>
-  </div>
-</section>
-
-<!-- CAPABILITIES -->
-<section id="capabilities">
-  <div class="section-label">Why Partner With Us</div>
-  <h2 class="section-title">Our Engineering Edge</h2>
-  <p class="section-sub">We bring technical depth and project-delivery discipline that US-based clients expect from a global engineering partner.</p>
-
-  <div class="cap-grid">
-    <div class="cap-item">
-      <div class="cap-number">01</div>
-      <div class="cap-content">
-        <h3>Mine-Grade Safety Design</h3>
-        <p>Deep experience designing safety-critical underground systems — escape routes, refuge chambers, blast protection — where zero tolerance for error is the standard.</p>
-      </div>
-    </div>
-    <div class="cap-item">
-      <div class="cap-number">02</div>
-      <div class="cap-content">
-        <h3>Full 3D-to-Fabrication Pipeline</h3>
-        <p>We own the full cycle from parametric 3D models and photorealistic renders through to complete fabrication drawing packages with BOMs and data sheets.</p>
-      </div>
-    </div>
-    <div class="cap-item">
-      <div class="cap-number">03</div>
-      <div class="cap-content">
-        <h3>Multi-Discipline Capability</h3>
-        <p>Mechanical, electrical, and civil drafting under one roof — no coordination gaps, streamlined delivery for complex, multi-system projects.</p>
-      </div>
-    </div>
-    <div class="cap-item">
-      <div class="cap-number">04</div>
-      <div class="cap-content">
-        <h3>Proven with Tier-1 Industrial Clients</h3>
-        <p>Trusted by Vedanta/Hindustan Zinc — one of the world's largest zinc producers — across four major mine sites.</p>
-      </div>
-    </div>
-    <div class="cap-item">
-      <div class="cap-number">05</div>
-      <div class="cap-content">
-        <h3>Cost-Effective Offshore Partnership</h3>
-        <p>World-class engineering quality at India-competitive pricing. Ideal for US firms looking to scale CAD/design capacity without scaling overheads.</p>
-      </div>
-    </div>
-    <div class="cap-item">
-      <div class="cap-number">06</div>
-      <div class="cap-content">
-        <h3>Fast Turnaround & Communication</h3>
-        <p>Small, focused team means no bureaucracy. Direct access to the lead engineer. Regular deliverable updates and quick revision cycles.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div>
-    <div class="section-label">Get In Touch</div>
-    <h2 class="section-title">Let's Work Together</h2>
-    <p class="section-sub">Ready to discuss your next engineering project? Reach out directly — we respond within 24 hours.</p>
-
-    <div class="contact-info">
-      <div class="contact-detail">
-        <div class="contact-icon">📍</div>
-        <div>
-          <div class="contact-label">Office Address</div>
-          <div class="contact-value">53-ext., Near UIT, Subhash Nagar<br>Bhilwara, Rajasthan — 311001, India</div>
-        </div>
-      </div>
-      <div class="contact-detail">
-        <div class="contact-icon">📱</div>
-        <div>
-          <div class="contact-label">Mobile / WhatsApp</div>
-          <div class="contact-value">+91 70736 63221</div>
-        </div>
-      </div>
-      <div class="contact-detail">
-        <div class="contact-icon">✉️</div>
-        <div>
-          <div class="contact-label">Email</div>
-          <div class="contact-value">s.techengineering03@gmail.com</div>
-        </div>
-      </div>
-      <div class="contact-detail">
-        <div class="contact-icon">🏢</div>
-        <div>
-          <div class="contact-label">GST Registration</div>
-          <div class="contact-value">08OBLPS7321L1ZP</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="contact-right">
-    <div class="software-stack">
-      <div class="stack-title">Software & Tools</div>
-      <div class="stack-items">
-        <span class="stack-item">AutoCAD</span>
-        <span class="stack-item">SolidWorks</span>
-        <span class="stack-item">Inventor</span>
-        <span class="stack-item">CATIA</span>
-        <span class="stack-item">KeyShot</span>
-        <span class="stack-item">ANSYS</span>
-        <span class="stack-item">MS Office</span>
-        <span class="stack-item">DWG</span>
-        <span class="stack-item">STEP / IGES</span>
-        <span class="stack-item">PDF</span>
-        <span class="stack-item">BOM</span>
-        <span class="stack-item">3D PDF</span>
-      </div>
-    </div>
-
-    <div style="margin-top: 24px; background: var(--panel); border: 1px solid var(--border); padding: 32px;">
-      <div class="stack-title" style="margin-bottom: 16px;">Industries Served</div>
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
-          <span style="font-size: 0.85rem; color: #bbb;">Underground Mining & Mineral Processing</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
-          <span style="font-size: 0.85rem; color: #bbb;">Heavy Industrial Machinery</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
-          <span style="font-size: 0.85rem; color: #bbb;">Hydro & Energy Infrastructure</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
-          <span style="font-size: 0.85rem; color: #bbb;">Civil Construction & Infrastructure</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="color: var(--gold); font-size: 0.8rem;">▸</span>
-          <span style="font-size: 0.85rem; color: #bbb;">Safety & Compliance Engineering</span>
-        </div>
-      </div>
-    </div>
-
-    <a href="mailto:s.techengineering03@gmail.com" class="btn-primary" style="display: inline-block; margin-top: 24px;">
-      Send Us an Enquiry
-    </a>
-  </div>
-</section>
-
-<div class="gold-divider"></div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">$ Tech Engineering</div>
-  <div class="footer-text">© 2025 S Tech Engineering · Bhilwara, India · Better Solution For All</div>
-  <div class="footer-gstin">GSTIN: 08OBLPS7321L1ZP</div>
-</footer>
-
+  <script>
+    function changeView(viewId) {
+      // Hide all standard layout components
+      document.querySelectorAll('.view-panel').forEach(panel => {
+        panel.classList.add('hidden');
+      });
+      
+      // Remove active class states from all tabs navigation keys
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show targeted display screen component panel layout block dynamically
+      document.getElementById('view-' + viewId).classList.remove('hidden');
+      
+      // Toggle active design status state onto the selected navbar target
+      document.getElementById('nav-' + viewId).classList.add('active');
+    }
+  </script>
 </body>
 </html>
